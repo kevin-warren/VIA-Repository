@@ -1,4 +1,4 @@
-import React, { JSX } from 'react';
+// import React, { JSX } from 'react';
 import Link from 'next/link';
 
 export default function Component({ id, title, content, date }: { id: string, title: string, content: string, date: string }) {

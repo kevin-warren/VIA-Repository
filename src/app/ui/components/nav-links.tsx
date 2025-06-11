@@ -13,16 +13,20 @@ import Link from 'next/link';
 //import clsx from 'clsx';
 
 const links = [
-  { name: 'Home', href: '/', icon: HomeIcon },
+  { name: 'Home', 
+    href: '/', 
+    icon: HomeIcon 
+  },
   {
-    name: 'Test One',
-    href: '/repository/test-one',
-    icon: DocumentDuplicateIcon,
+    name: 'Application Form',
+    href: '/application-form',
+    // icon: DocumentDuplicateIcon,
   },
   { 
-    name: 'Test Two', 
-    href: '/repository/test-two', 
-    icon: EnvelopeIcon },
+    name: 'Profile Form', 
+    href: '/profile-form', 
+    // icon: EnvelopeIcon 
+  },
 ];
 
 export default function NavLinks() {

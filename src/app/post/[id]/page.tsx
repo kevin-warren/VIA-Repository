@@ -21,3 +21,9 @@ export default async function Page({ params }: Props) {
     </>
   );
 }
+
+export async function generateStaticParams() {
+  return posts.map((post) => ({
+    id: post.id,
+  }));
+}

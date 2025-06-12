@@ -1,4 +1,4 @@
-import { Metadata } from 'next';
+//import { Metadata } from 'next';
 import { posts } from '@/app/lib/placeholder-data';
 import Post from '@/app/ui/components/posts/Post';
 

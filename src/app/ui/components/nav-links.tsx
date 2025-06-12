@@ -13,7 +13,7 @@ import Link from 'next/link';
 //import clsx from 'clsx';
 
 const links = [
-  { name: 'Home', 
+  { name: 'Repository', 
     href: '/', 
     icon: HomeIcon 
   },

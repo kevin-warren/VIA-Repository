@@ -17,7 +17,7 @@ export default function Component({ id, title, content, date }: { id: string, ti
 */
 
 import Link from 'next/link';
-import styles from '@/app/ui/styles/home.module.css';
+import styles from '@/app/ui/styles/Post.module.css';
 
 export default function Component({
   id,

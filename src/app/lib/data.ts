@@ -1,4 +1,5 @@
 import { createClient } from '@vercel/postgres';
+import { unstable_noStore as noStore } from 'next/cache';
 import { sql } from '@vercel/postgres';
 
 // Define the expected shape of a post
@@ -27,7 +28,8 @@ export async function connectToDB() {
 // Return typed posts, or an empty array if query fails
 export async function getPosts(): Promise<Post[]> {
   try {
-    const data = await sql<Post>`SELECT id, title, content, date, user FROM posts ORDER BY date ASC`;
+    noStore();
+    const data = await sql<Post>`SELECT * FROM posts ORDER BY date DESC`;
     return data.rows;
   } catch (error) {
     console.error('Error getting posts', error);

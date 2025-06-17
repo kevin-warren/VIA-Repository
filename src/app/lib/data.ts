@@ -11,6 +11,13 @@ export type Post = {
   user: string;
 };
 
+export type Profile = {
+  id: string;
+  name: string;
+  bio: string;
+  date: string;
+};
+
 export async function connectToDB() {
   const client = createClient();
   await client.connect();
@@ -29,10 +36,22 @@ export async function connectToDB() {
 export async function getPosts(): Promise<Post[]> {
   try {
     noStore();
-    const data = await sql<Post>`SELECT * FROM posts ORDER BY date DESC`;
+    const data = await sql<Post>`SELECT * FROM posts ORDER BY date ASC`;
     return data.rows;
   } catch (error) {
     console.error('Error getting posts', error);
     return []; // fallback to prevent undefined
   }
 }
+
+export async function getProfiles(): Promise<Profile[]> {
+  try {
+    noStore();
+    const data = await sql<Profile>`SELECT * FROM profiles ORDER BY date ASC`;
+    return data.rows;
+  } catch (error) {
+    console.error('Error getting profiles', error);
+    return [];
+  }
+}
+

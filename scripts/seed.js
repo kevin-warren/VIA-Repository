@@ -1,5 +1,6 @@
 import { db } from "@vercel/postgres";
 import { posts } from "../src/app/lib/placeholder-data.js";
+import { profiles } from "../src/app/lib/placeholder-profiles.js";
 
 async function seedPosts(client) {
   try {
@@ -39,9 +40,41 @@ async function seedPosts(client) {
   }
 }
 
+async function seedProfiles(client) {
+  try {
+    const createProfilesTable = await client.sql`
+    DROP TABLE IF EXISTS profiles;  
+    CREATE TABLE IF NOT EXISTS profiles (
+        id UUID PRIMARY KEY,
+        name TEXT NOT NULL,
+        bio TEXT,
+        date TEXT NOT NULL
+      );
+    `;
+    console.log('Created "profiles" table');
+
+    const insertedProfiles = await Promise.all(
+      profiles.map(async (profile) => {
+        return client.sql`
+          INSERT INTO profiles (id, name, bio, date)
+          VALUES (${profile.id}, ${profile.name}, ${profile.bio}, ${profile.date})
+          ON CONFLICT (id) DO NOTHING;
+        `;
+      })
+    );
+
+    console.log(`Seeded ${insertedProfiles.length} profiles`);
+    return { createProfilesTable, profiles: insertedProfiles };
+  } catch (error) {
+    console.error("Error seeding profiles:", error);
+    throw error;
+  }
+}
+
 async function main() {
   const client = await db.connect();
   await seedPosts(client);
+  await seedProfiles(client);
   await client.end();
 }
 

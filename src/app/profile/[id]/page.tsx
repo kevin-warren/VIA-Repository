@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
-import { profiles } from '@/app/lib/placeholder-profiles';
+// import { profiles } from '@/app/lib/placeholder-profiles';
 import Profile from '@/app/ui/components/profiles/Profile';
+import { getProfiles } from '@/app/lib/data'; // import real data
 
 type Props = {
   params: { id: string } | Promise<{ id: string }>;
@@ -9,7 +10,7 @@ type Props = {
 export default async function Page({ params }: Props) {
   // Await params in case it's a Promise
   const resolvedParams = params instanceof Promise ? await params : params;
-
+  const profiles = await getProfiles(); // fetch from database
   const profile = profiles.find((profile) => profile.id === resolvedParams.id);
 
   if (!profile) notFound();
@@ -23,6 +24,7 @@ export default async function Page({ params }: Props) {
 }
 
 export async function generateStaticParams() {
+  const profiles = await getProfiles(); // fetch real post IDs
   return profiles.map((profile) => ({
     id: profile.id,
   }));

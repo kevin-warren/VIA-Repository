@@ -8,8 +8,8 @@ export default function Page() {
 
   const [formData, setFormData] = useState({
     id: "",
-    title: "",
-    content: "",
+    name: "",
+    bio: "",
     date: new Date().toISOString().slice(0, 10),
   });
 
@@ -30,7 +30,7 @@ export default function Page() {
     const uuid = uuidv4();
 
     fetch(
-      `/api/posts?id=${uuid}&title=${formData.title}&content=${formData.content}&date=${formData.date}`,
+      `/api/profiles?id=${uuid}&name=${formData.name}&bio=${formData.bio}&date=${formData.date}`,
       {
         method: "POST",
         headers: {
@@ -42,41 +42,41 @@ export default function Page() {
       .then(() => {
         setFormData({
           id: "",
-          title: "",
-          content: "",
+          name: "",
+          bio: "",
           date: "",
         });
-        router.push("/");
+        router.push("/?tab=profiles");
       })
       .catch(console.error);
   };
 
   return (
     <div className="bg-white p-8 rounded shadow">
-      <h2 className="text-2xl mb-4 text-purple-700">New Job Post</h2>
+      <h2 className="text-2xl mb-4 text-purple-700">New Profile Post</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="title" className="block font-medium">
-            Job Title:
+          <label htmlFor="name" className="block font-medium">
+            Name:
           </label>
           <input
             type="text"
-            id="title"
-            name="title"
-            value={formData.title}
+            id="name"
+            name="name"
+            value={formData.name}
             onChange={handleChange}
             className="w-full border-2 border-purple-100 p-2 rounded-md focus:border-purple-200 focus:outline-none"
           />
         </div>
         <div>
-          <label htmlFor="content" className="block font-medium">
-            Content:
+          <label htmlFor="bio" className="block font-medium">
+            Bio:
           </label>
           <textarea
-            id="content"
-            name="content"
+            id="bio"
+            name="bio"
             rows={4} // rows should be a number
-            value={formData.content}
+            value={formData.bio}
             onChange={handleChange}
             className="w-full border-2 border-purple-100 p-2 rounded-md focus:border-purple-200 focus:outline-none"
           />

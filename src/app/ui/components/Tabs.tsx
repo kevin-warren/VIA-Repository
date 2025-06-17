@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { useState, useEffect } from 'react';
 import Post from '@/app/ui/components/posts/Post';
 import Profile from '@/app/ui/components/profiles/Profile';
-import styles from '@/app/page.module.css'; // or move to a shared css file
+import styles from '@/app/page.module.css';
 
 type TabProps = {
   posts: typeof import('@/app/lib/placeholder-data').posts;
@@ -11,7 +12,16 @@ type TabProps = {
 };
 
 export default function Tabs({ posts, profiles }: TabProps) {
-  const [activeTab, setActiveTab] = useState<'jobs' | 'profiles'>('jobs');
+  const searchParams = useSearchParams();
+  const initialTab = searchParams.get('tab') === 'profiles' ? 'profiles' : 'jobs';
+  const [activeTab, setActiveTab] = useState<'jobs' | 'profiles'>(initialTab);
+
+  useEffect(() => {
+    const tab = searchParams.get('tab');
+    if (tab === 'profiles' || tab === 'jobs') {
+      setActiveTab(tab);
+    }
+  }, [searchParams]);
 
   return (
     <>

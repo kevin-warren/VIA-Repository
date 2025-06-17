@@ -78,13 +78,5 @@ export const posts = [
     date: "632982",
     user: "Sandy L",
   },
-  {
-    id: "sldkfjsl",
-    title: "Post Title 11",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    date: "6/16/2025",
-    user: "Kevin W",
-  }
 ];
 

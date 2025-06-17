@@ -33,7 +33,7 @@
     "**/*.tsx",
     "next-env.d.ts",
     ".next/types/**/*.ts"
-  ],
+, "src/app/lib/placeholder-profiles.js", "src/app/scripts/seed.js"  ],
   "exclude": [
     "node_modules",
     ".next",

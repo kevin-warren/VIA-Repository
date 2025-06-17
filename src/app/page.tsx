@@ -4,6 +4,8 @@ import Tabs from './ui/components/Tabs'; // client component
 import styles from './page.module.css';
 import { connectToDB, getPosts, getProfiles } from '@/app/lib/data';
 import Link from "next/link";
+import { Suspense } from 'react';
+
 
 export default async function Home() {
   const client = await connectToDB();
@@ -29,7 +31,9 @@ export default async function Home() {
           </Link>
         </div>
 
-        <Tabs posts={posts} profiles={profiles} />
+        <Suspense fallback={<div>Loading...</div>}>
+          <Tabs posts={posts} profiles={profiles} />
+        </Suspense>
       </main>
       <footer className={styles.footer}></footer>
     </div>

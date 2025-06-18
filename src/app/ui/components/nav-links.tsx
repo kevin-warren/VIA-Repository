@@ -11,6 +11,8 @@ import {
 //import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 //import clsx from 'clsx';
+import styles from '@/app/ui/styles/NavLinks.module.css';
+
 
 const links = [
   { name: 'Repository', 
@@ -39,9 +41,9 @@ export default function NavLinks() {
           <Link
             key={link.name}
             href={link.href}
-            className="'flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-purple-100 md:flex-none md:justify-start md:p-2 md:px-3'"
+            className={styles.navLink}
           >
-            <p className="hidden md:block">{link.name}</p>
+            <p className={styles.linkText}>{link.name}</p>
           </Link>
         );
       })}

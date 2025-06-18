@@ -1,0 +1,21 @@
+.sideNav {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  padding: 1rem 0.75rem;
+}
+
+.navContainer {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .navContainer {
+    flex-direction: column;
+    gap: 0;
+  }
+}

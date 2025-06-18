@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "@/app/ui/styles/globals.css";
 import SideNav from "@/app/ui/components/sidenav";
+import styles from '@/app/ui/styles/layout.module.css';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,15 +21,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <div className="flex min-h-screen">
-          <main className="flex-grow p-4">
-            <SideNav />
+        <div className={styles.layout}>
+          <SideNav />
+          <main className={styles.mainContent}>
             {children}
           </main>
         </div>

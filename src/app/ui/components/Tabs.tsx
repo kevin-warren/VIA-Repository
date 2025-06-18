@@ -4,7 +4,7 @@ import { useSearchParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import Post from '@/app/ui/components/posts/Post';
 import Profile from '@/app/ui/components/profiles/Profile';
-import styles from '@/app/page.module.css';
+import styles from '@/app/ui/styles/Tabs.module.css';
 
 type TabProps = {
   posts: typeof import('@/app/lib/placeholder-data').posts;

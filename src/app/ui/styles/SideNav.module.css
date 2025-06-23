@@ -7,11 +7,10 @@
 
 .navContainer {
   display: flex;
-  flex-grow: 1;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
   gap: 0.5rem;
 }
+
 
 @media (min-width: 768px) {
   .navContainer {

@@ -20,13 +20,13 @@ const links = [
     icon: HomeIcon 
   },
   {
-    name: 'Application Form',
-    href: '/application-form',
+    name: 'Create New Job Post',
+    href: "/post/insert",
     // icon: DocumentDuplicateIcon,
   },
   { 
-    name: 'Profile Form', 
-    href: '/profile-form', 
+    name: 'Create New Profile', 
+    href: "/profile/insert", 
     // icon: EnvelopeIcon 
   },
 ];

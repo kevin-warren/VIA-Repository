@@ -31,13 +31,20 @@ export default function Component({
   date: string;
 }) {
   return (
-    <div key={id} className={styles.jobPosting}>
-      <Link href={`/post/${id}`} className={styles.jobTitle}>
-        <h2>{title}</h2>
-      </Link>
+    //<div className={styles.wrapper}>
+      <div key={id} className={styles.jobPosting}>
+      <div className={styles.container}>
+        <Link href={`/post/${id}`} className={styles.jobTitle}>
+          <h2>{title}</h2>
+        </Link>
+        <button className = {styles.tab}>
+          Apply
+        </button>
+      </div>
       <p className={styles.jobDate}>{date}</p>
       <p className={styles.jobDescription}>{content}</p>
-    </div>
+      </div>
+    //</div>
   );
 }
 

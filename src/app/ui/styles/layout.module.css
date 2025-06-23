@@ -1,9 +1,18 @@
 .layout {
   display: flex;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .mainContent {
   flex-grow: 1;
+  overflow-y: auto;
   padding: 1rem;
+
+}
+
+.sideNav {
+  width: 240px;       /* Fixed width for sidebar */
+  flex-shrink: 0;     /* Prevent it from shrinking or expanding */
+  background-color: #f9fafb; /* Optional */
 }

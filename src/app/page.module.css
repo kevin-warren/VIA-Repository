@@ -6,7 +6,7 @@
 
 .main {
   flex-grow: 1;
-  padding: 1rem;
+  padding: 0rem;
 }
 
 .footer {
@@ -15,7 +15,7 @@
 }
 
 .dbStatus {
-  color: #16a34a; /* Tailwind's green-500 */
+  color: #16a34a; 
   margin: 0.5rem 0;
 }
 
@@ -26,7 +26,7 @@
 }
 
 .buttonPurple {
-  background-color: #7c3aed; /* purple-600 */
+  background-color: #7c3aed; 
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 0.375rem;
@@ -36,11 +36,11 @@
 }
 
 .buttonPurple:hover {
-  background-color: #6b21a8; /* purple-700 */
+  background-color: #6b21a8; 
 }
 
 .buttonGreen {
-  background-color: #16a34a; /* green-600 */
+  background-color: #16a34a; 
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 0.375rem;
@@ -50,7 +50,7 @@
 }
 
 .buttonGreen:hover {
-  background-color: #15803d; /* green-700 */
+  background-color: #15803d; 
 }
 
 .tabButtons {
@@ -70,10 +70,10 @@
 }
 
 .tab:hover {
-  background-color: #f3f4f6; /* gray-100 */
+  background-color: #f3f4f6; 
 }
 
 .activeTab {
-  background-color: #ede9fe; /* purple-100 */
-  border-color: #a78bfa; /* purple-300 */
+  background-color: #ede9fe; 
+  border-color: #a78bfa; 
 }

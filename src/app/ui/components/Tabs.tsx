@@ -43,14 +43,14 @@ export default function Tabs({ posts, profiles }: TabProps) {
       <section>
         {activeTab === 'jobs' ? (
           <>
-            <h2>Job Postings</h2>
+            {/* <h2>Job Postings</h2> */}
             {posts?.map((post) => (
               <Post key={post.id} {...post} />
             ))}
           </>
         ) : (
           <>
-            <h2>Profile Postings</h2>
+            {/* <h2>Profile Postings</h2> */}
             {profiles?.map((profile) => (
               <Profile key={profile.id} {...profile} />
             ))}

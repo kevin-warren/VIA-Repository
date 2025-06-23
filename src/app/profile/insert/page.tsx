@@ -51,54 +51,56 @@ export default function Page() {
   };
 
   return (
-    <div className={styles.container}>
-      <h2 className={styles.heading}>New Profile Post</h2>
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <div className={styles.formGroup}>
-          <label htmlFor="name" className={styles.label}>
-            Name:
-          </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            className={styles.input}
-          />
-        </div>
-        <div className={styles.formGroup}>
-          <label htmlFor="bio" className={styles.label}>
-            Bio:
-          </label>
-          <textarea
-            id="bio"
-            name="bio"
-            rows={4}
-            value={formData.bio}
-            onChange={handleChange}
-            className={styles.input}
-          />
-        </div>
-        <div className={styles.formGroup}>
-          <label htmlFor="date" className={styles.label}>
-            Date:
-          </label>
-          <input
-            type="text"
-            id="date"
-            name="date"
-            value={formData.date}
-            readOnly
-            className={styles.input}
-          />
-        </div>
-        <div>
-          <button type="submit" className={styles.button}>
-            Submit
-          </button>
-        </div>
-      </form>
-    </div>
+    <main className={styles.pageWrapper}>
+      <div className={styles.container}>
+        <h2 className={styles.heading}>New Profile Post</h2>
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <div className={styles.formGroup}>
+            <label htmlFor="name" className={styles.label}>
+              Name:
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              className={styles.input}
+            />
+          </div>
+          <div className={styles.formGroup}>
+            <label htmlFor="bio" className={styles.label}>
+              Bio:
+            </label>
+            <textarea
+              id="bio"
+              name="bio"
+              rows={4}
+              value={formData.bio}
+              onChange={handleChange}
+              className={styles.input}
+            />
+          </div>
+          <div className={styles.formGroup}>
+            <label htmlFor="date" className={styles.label}>
+              Date:
+            </label>
+            <input
+              type="text"
+              id="date"
+              name="date"
+              value={formData.date}
+              readOnly
+              className={styles.input}
+            />
+          </div>
+          <div>
+            <button type="submit" className={styles.button}>
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
   );
 }

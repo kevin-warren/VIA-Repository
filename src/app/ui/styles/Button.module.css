@@ -1,0 +1,26 @@
+.button {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  background-color: #2563eb; /* blue-600 */
+  color: white;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  border: none;
+}
+
+.button:hover {
+  background-color: #1d4ed8; /* blue-700 */
+}
+
+.button:disabled,
+.button[aria-disabled="true"] {
+  background-color: #9ca3af; /* gray-400 */
+  cursor: not-allowed;
+}

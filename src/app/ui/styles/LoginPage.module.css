@@ -1,0 +1,33 @@
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.wrapper {
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  padding: 1rem;
+  margin-top: -8rem; /* equivalent to md:-mt-32 */
+}
+
+.banner {
+  display: flex;
+  height: 5rem; /* h-20 */
+  width: 100%;
+  align-items: flex-end;
+  border-radius: 0.5rem;
+  background-color: #3b82f6; /* Tailwind's blue-500 */
+  padding: 0.75rem;
+}
+
+.logo {
+  width: 8rem;
+  color: white;
+}

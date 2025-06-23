@@ -1,11 +1,15 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 import { db } from "@vercel/postgres";
 import { posts } from "../src/app/lib/placeholder-data.js";
 import { profiles } from "../src/app/lib/placeholder-profiles.js";
+import bcrypt from "bcrypt";
 
 async function seedPosts(client) {
   try {
     await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
-    // Create the "users" table if it doesn't exist
+
     const createTable = await client.sql`
       CREATE TABLE IF NOT EXISTS posts (
         id UUID DEFAULT uuid_generate_v1mc() PRIMARY KEY,
@@ -18,7 +22,6 @@ async function seedPosts(client) {
 
     console.log(`Created "posts" table`);
 
-    // Insert data into the "posts" table
     const insertedPosts = await Promise.all(
       posts.map(async (post) => {
         return client.sql`
@@ -28,12 +31,9 @@ async function seedPosts(client) {
       `;
       })
     );
-    console.log(`Seeded ${insertedPosts.length} posts articles`);
 
-    return {
-      createTable,
-      posts: insertedPosts,
-    };
+    console.log(`Seeded ${insertedPosts.length} posts`);
+    return { createTable, posts: insertedPosts };
   } catch (error) {
     console.error("Error seeding posts:", error);
     throw error;
@@ -43,14 +43,15 @@ async function seedPosts(client) {
 async function seedProfiles(client) {
   try {
     const createProfilesTable = await client.sql`
-    DROP TABLE IF EXISTS profiles;  
-    CREATE TABLE IF NOT EXISTS profiles (
+      DROP TABLE IF EXISTS profiles;
+      CREATE TABLE IF NOT EXISTS profiles (
         id UUID PRIMARY KEY,
         name TEXT NOT NULL,
         bio TEXT,
         date TEXT NOT NULL
       );
     `;
+
     console.log('Created "profiles" table');
 
     const insertedProfiles = await Promise.all(
@@ -71,16 +72,62 @@ async function seedProfiles(client) {
   }
 }
 
+async function seedUsers(client) {
+  try {
+    const createUsersTable = await client.sql`
+      CREATE TABLE IF NOT EXISTS users (
+        id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+        name TEXT,
+        email TEXT UNIQUE NOT NULL,
+        password TEXT NOT NULL,
+        created_at TIMESTAMP DEFAULT NOW()
+      );
+    `;
+
+    console.log('Created "users" table');
+
+    const users = [
+      {
+        name: "Alice Smith",
+        email: "alice@example.com",
+        password: "password123",
+      },
+      {
+        name: "Bob Johnson",
+        email: "bob@example.com",
+        password: "supersecure456",
+      },
+    ];
+
+    const insertedUsers = await Promise.all(
+      users.map(async (user) => {
+        const hashedPassword = await bcrypt.hash(user.password, 10);
+        return client.sql`
+          INSERT INTO users (name, email, password)
+          VALUES (${user.name}, ${user.email}, ${hashedPassword})
+          ON CONFLICT (email) DO NOTHING;
+        `;
+      })
+    );
+
+    console.log(`Seeded ${insertedUsers.length} users`);
+    return { createUsersTable, users: insertedUsers };
+  } catch (error) {
+    console.error("Error seeding users:", error);
+    throw error;
+  }
+}
+
 async function main() {
   const client = await db.connect();
+
   await seedPosts(client);
   await seedProfiles(client);
+  await seedUsers(client); // <-- ADDED USERS SEEDING
+
   await client.end();
 }
 
 main().catch((err) => {
-  console.error(
-    "An error occurred while attempting to seed the database:",
-    err
-  );
+  console.error("An error occurred while attempting to seed the database:", err);
 });

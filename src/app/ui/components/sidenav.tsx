@@ -1,6 +1,8 @@
 import NavLinks from './nav-links';
 import styles from '@/app/ui/styles/layout.module.css';
 import { signOut } from '../../../../auth';
+import { PowerIcon } from '@heroicons/react/24/outline';
+import { Button } from '@/app/ui/button';
 
 
 export default function SideNav() {
@@ -12,8 +14,12 @@ export default function SideNav() {
           action={async () => {
             'use server';
             await signOut({ redirectTo: '/' });
-          }}
-        >Sign out</form>
+          }}>
+            <Button>
+              <PowerIcon className="w-6" />
+              <div className="hidden md:block">Sign out</div>
+            </Button>
+        </form>
       </div>
     </div>
   );

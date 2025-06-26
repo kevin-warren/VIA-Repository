@@ -24,7 +24,7 @@
     ],
     "paths": {
       "@/*": [
-        "./src/*"
+        "./src/*",
       ]
     }
   },
@@ -33,7 +33,7 @@
     "**/*.tsx",
     "next-env.d.ts",
     ".next/types/**/*.ts"
-, "src/app/lib/placeholder-profiles.js", "src/app/scripts/seed.js"  ],
+, "app/lib/placeholder-profiles.js", "app/scripts/seed.js"  ],
   "exclude": [
     "node_modules",
     ".next",

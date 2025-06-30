@@ -11,7 +11,7 @@ export default async function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <Suspense fallback={<div>Loading.....</div>}>
+        <Suspense fallback={<div>Loading...</div>}>
           <Tabs posts={posts} profiles={profiles} />
         </Suspense>
       </main>

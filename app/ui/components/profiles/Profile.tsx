@@ -10,14 +10,14 @@ export default function Profile({
   id: string;
   name: string;
   bio: string;
-  date: string;
+  date: Date | string;
 }) {
   return (
     <div className={styles.profileCard}>
       <Link href={`/profile/${id}`} className={styles.profileName}>
         <h2>{name}</h2>
       </Link>
-      <p className={styles.profileDate}>{date}</p>
+      <p className={styles.profileDate}>{date instanceof Date ? date.toISOString().split('T')[0] : date}</p>
       <p className={styles.profileBio}>{bio}</p>
     </div>
   );

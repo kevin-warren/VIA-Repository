@@ -2,10 +2,12 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { v4 as uuidv4 } from 'uuid';
+import { useSession } from 'next-auth/react';
 import styles from '../../ui/styles/InsertForm.module.css';
 
 export default function Page() {
   const router = useRouter();
+  const { data: session } = useSession();
 
   const [formData, setFormData] = useState({
     id: '',
@@ -24,41 +26,42 @@ export default function Page() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const uuid = uuidv4();
 
-    fetch(
-      `/api/profiles?id=${uuid}&name=${formData.name}&bio=${formData.bio}&date=${formData.date}`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ ...formData, id: uuid }),
-      }
-    )
-      .then(() => {
-        setFormData({
-          id: '',
-          name: '',
-          bio: '',
-          date: '',
-        });
-        router.push('/?tab=profiles');
-      })
-      .catch(console.error);
+    if (!session?.user?.name) {
+      alert("Must be signed in to submit a profile.");
+      return;
+    }
+
+    await fetch('/api/profiles', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        ...formData,
+        id: uuid,
+        author: session.user.name,
+      }),
+    });
+
+    setFormData({
+      id: '',
+      name: '',
+      bio: '',
+      date: '',
+    });
+
+    router.push('/?tab=profiles');
   };
 
   return (
     <main className={styles.pageWrapper}>
       <div className={styles.container}>
-        <h2 className={styles.heading}>New Profile Post</h2>
+        <h2 className={styles.heading}>Create New Profile</h2>
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.formGroup}>
-            <label htmlFor="name" className={styles.label}>
-              Name:
-            </label>
+            <label htmlFor="name" className={styles.label}>Name:</label>
             <input
               type="text"
               id="name"
@@ -69,9 +72,7 @@ export default function Page() {
             />
           </div>
           <div className={styles.formGroup}>
-            <label htmlFor="bio" className={styles.label}>
-              Bio:
-            </label>
+            <label htmlFor="bio" className={styles.label}>Bio:</label>
             <textarea
               id="bio"
               name="bio"
@@ -82,9 +83,7 @@ export default function Page() {
             />
           </div>
           <div className={styles.formGroup}>
-            <label htmlFor="date" className={styles.label}>
-              Date:
-            </label>
+            <label htmlFor="date" className={styles.label}>Date:</label>
             <input
               type="text"
               id="date"
@@ -95,9 +94,7 @@ export default function Page() {
             />
           </div>
           <div>
-            <button type="submit" className={styles.button}>
-              Submit
-            </button>
+          <button type="submit" className={styles.button}>Submit</button>
           </div>
         </form>
       </div>

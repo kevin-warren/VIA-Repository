@@ -28,7 +28,7 @@ export default function Component({
   id: string;
   title: string;
   content: string;
-  date: string;
+  date: Date | string;
 }) {
   return (
     //<div className={styles.wrapper}>
@@ -41,7 +41,7 @@ export default function Component({
           Apply
         </button>
       </div>
-      <p className={styles.jobDate}>{date}</p>
+      <p className={styles.jobDate}>{date instanceof Date ? date.toISOString().split('T')[0] : date}</p>
       <p className={styles.jobDescription}>{content}</p>
       </div>
     //</div>

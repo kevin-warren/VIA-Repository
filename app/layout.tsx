@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import ".//ui/styles/globals.css";
 import SideNav from "./ui/components/sidenav";
 import styles from ".//ui/styles/layout.module.css";
+import { SessionProvider } from "next-auth/react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,16 +27,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <div className={styles.layout}>
-          <div className={styles.sideNav}>
-            <SideNav />
-          </div> 
-          <main className={styles.mainContent}>
-            {children}
-          </main>
-        </div>
-      </body>
+      <SessionProvider>
+        <body className={`${geistSans.variable} ${geistMono.variable}`}>
+          <div className={styles.layout}>
+            <div className={styles.sideNav}>
+              <SideNav />
+            </div> 
+            <main className={styles.mainContent}>
+              {children}
+            </main>
+          </div>
+        </body>
+      </SessionProvider>
     </html>
   );
 }

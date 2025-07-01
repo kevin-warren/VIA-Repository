@@ -6,10 +6,10 @@ import Post from './posts/Post';
 import Profile from './profiles/Profile';
 import styles from '../styles/Tabs.module.css';
 
-type TabProps = {
-  posts: typeof import('../../lib/placeholder-data').posts;
-  profiles: typeof import('../../lib/placeholder-profiles').profiles;
-};
+interface TabProps {
+  posts: { id: string; title: string; content: string; date: string; author: string; }[];
+  profiles: { id: string; name: string; bio: string; date: string; }[];
+}
 
 export default function Tabs({ posts, profiles }: TabProps) {
   const searchParams = useSearchParams();
@@ -45,14 +45,26 @@ export default function Tabs({ posts, profiles }: TabProps) {
           <>
             {/* <h2>Job Postings</h2> */}
             {posts?.map((post) => (
-              <Post key={post.id} {...post} />
+              <Post
+                key={post.id}
+                id={post.id}
+                title={post.title}
+                content={post.content}
+                date={post.date}
+              />
             ))}
           </>
         ) : (
           <>
             {/* <h2>Profile Postings</h2> */}
             {profiles?.map((profile) => (
-              <Profile key={profile.id} {...profile} />
+              <Profile
+                key={profile.id}
+                id={profile.id}
+                name={profile.name}
+                bio={profile.bio}
+                date={profile.date}
+              />
             ))}
           </>
         )}

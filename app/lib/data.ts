@@ -7,8 +7,8 @@ export type Post = {
   id: string;
   title: string;
   content: string;
-  date: string;
-  user: string;
+  date: string; // Store dates as ISO strings in the database
+  author: string;
 };
 
 export type Profile = {
@@ -16,6 +16,7 @@ export type Profile = {
   name: string;
   bio: string;
   date: string;
+  author: string;
 };
 
 export async function connectToDB() {
@@ -36,8 +37,11 @@ export async function connectToDB() {
 export async function getPosts(): Promise<Post[]> {
   try {
     noStore();
-    const data = await sql<Post>`SELECT * FROM posts ORDER BY date ASC`;
-    return data.rows;
+    const data = await sql<Post>`SELECT * FROM "Post" ORDER BY date ASC`;
+    return data.rows.map(post => ({
+      ...post,
+      date: new Date(post.date).toISOString().split('T')[0] // Convert Date to YYYY-MM-DD format
+    }));
   } catch (error) {
     console.error('Error getting posts', error);
     return []; // fallback to prevent undefined
@@ -47,8 +51,11 @@ export async function getPosts(): Promise<Post[]> {
 export async function getProfiles(): Promise<Profile[]> {
   try {
     noStore();
-    const data = await sql<Profile>`SELECT * FROM profiles ORDER BY date ASC`;
-    return data.rows;
+    const data = await sql<Profile>`SELECT * FROM "Profile" ORDER BY date ASC`;
+    return data.rows.map(profile => ({
+      ...profile,
+      date: new Date(profile.date).toISOString().split('T')[0] // Convert Date to YYYY-MM-DD format
+    }));
   } catch (error) {
     console.error('Error getting profiles', error);
     return [];

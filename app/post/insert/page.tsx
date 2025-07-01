@@ -1,4 +1,5 @@
 'use client';
+import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { v4 as uuidv4 } from 'uuid';
@@ -6,6 +7,7 @@ import styles from '../../ui/styles/InsertForm.module.css';
 
 export default function Page() {
   const router = useRouter();
+  const { data: session } = useSession(); // get user session
 
   const [formData, setFormData] = useState({
     id: '',
@@ -24,30 +26,36 @@ export default function Page() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const uuid = uuidv4();
 
-    fetch(
-      `/api/posts?id=${uuid}&title=${formData.title}&content=${formData.content}&date=${formData.date}`,
-      {
+    const author = session?.user?.name; // get user's name
+
+    if (!author) {
+      alert("You must be signed in to submit a post.");
+      return;
+    }
+    console.log("Submitting post with author:", author);
+
+    try {
+      await fetch('/api/posts', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ...formData, id: uuid }),
-      }
-    )
-      .then(() => {
-        setFormData({
-          id: '',
-          title: '',
-          content: '',
-          date: '',
-        });
-        router.push('/');
-      })
-      .catch(console.error);
+        body: JSON.stringify({
+          ...formData,
+          id: uuid,
+          author,
+        }),
+      });
+
+      setFormData({ id: '', title: '', content: '', date: '' });
+      router.push('/');
+    } catch (error) {
+      console.error("❌ Failed to submit post", error);
+    }
   };
 
   return (
@@ -56,9 +64,7 @@ export default function Page() {
         <h2 className={styles.heading}>New Job Post</h2>
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.formGroup}>
-            <label htmlFor="title" className={styles.label}>
-              Job Title:
-            </label>
+            <label htmlFor="title" className={styles.label}>Job Title:</label>
             <input
               type="text"
               id="title"
@@ -69,9 +75,7 @@ export default function Page() {
             />
           </div>
           <div className={styles.formGroup}>
-            <label htmlFor="content" className={styles.label}>
-              Content:
-            </label>
+            <label htmlFor="content" className={styles.label}>Content:</label>
             <textarea
               id="content"
               name="content"
@@ -82,9 +86,7 @@ export default function Page() {
             />
           </div>
           <div className={styles.formGroup}>
-            <label htmlFor="date" className={styles.label}>
-              Date:
-            </label>
+            <label htmlFor="date" className={styles.label}>Date:</label>
             <input
               type="text"
               id="date"
@@ -95,9 +97,7 @@ export default function Page() {
             />
           </div>
           <div>
-            <button type="submit" className={styles.button}>
-              Submit
-            </button>
+            <button type="submit" className={styles.button}>Submit</button>
           </div>
         </form>
       </div>

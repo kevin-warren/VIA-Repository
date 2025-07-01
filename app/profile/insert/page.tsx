@@ -58,7 +58,7 @@ export default function Page() {
   return (
     <main className={styles.pageWrapper}>
       <div className={styles.container}>
-        <h2 className={styles.heading}>Create New Profile!!!</h2>
+        <h2 className={styles.heading}>Create New Profile</h2>
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.formGroup}>
             <label htmlFor="name" className={styles.label}>Name:</label>

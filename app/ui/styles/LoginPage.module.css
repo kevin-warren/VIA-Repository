@@ -1,4 +1,4 @@
-.main {
+/* .main {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -14,20 +14,20 @@
   flex-direction: column;
   gap: 0.625rem;
   padding: 1rem;
-  margin-top: -8rem; /* equivalent to md:-mt-32 */
+  margin-top: -8rem; 
 }
 
 .banner {
   display: flex;
-  height: 5rem; /* h-20 */
+  height: 5rem;
   width: 100%;
   align-items: flex-end;
   border-radius: 0.5rem;
-  background-color: #3b82f6; /* Tailwind's blue-500 */
+  background-color: #3b82f6;
   padding: 0.75rem;
 }
 
 .logo {
   width: 8rem;
   color: white;
-}
+} */

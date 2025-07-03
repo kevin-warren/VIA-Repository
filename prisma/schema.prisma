@@ -13,6 +13,7 @@ model User {
   email         String          @unique
   emailVerified DateTime?
   image         String?
+  password      String? // Optional password field for credential auth
   accounts      Account[]
   sessions      Session[]
   // Optional for WebAuthn support

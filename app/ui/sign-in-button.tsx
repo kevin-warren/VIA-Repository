@@ -1,9 +1,11 @@
 'use client';
 import { login } from "../lib/actions/auth";
+import Link from "next/link";
+
 
 export const SignInButton = () => {
   return ( 
-    <button onClick={() => login()}>
+    <Link href="/login">
       Sign In
-    </button>
+    </Link>
 )};

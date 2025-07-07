@@ -1,33 +1,28 @@
-"use server";
+//"use server";
+export const dynamic = "force-dynamic";
 
-//import { sign } from 'crypto';
+import { auth } from "../../../auth";
 import NavLinks from './nav-links';
 import styles from '../../ui/styles/layout.module.css';
-//import { signIn } from 'next-auth/react';
-//import { PowerIcon } from '@heroicons/react/24/outline';
-//import { Button } from '@/app/ui/button';
-import { auth } from "../../../auth";
 import { SignInButton } from '../sign-in-button';
 import { SignOutButton } from '../sign-out-button';
 
-
 export default async function SideNav() {
   const session = await auth();
-  console.log(session);
+  console.log("SESSION FROM AUTH:", session);
 
   return (
     <div className={styles.sideNav}>
       <div className={styles.navContainer}>
         <NavLinks />
-        
-         {session?.user ? (
+        {session?.user ? (
           <>
-            <div> Signed in: {session.user.name} </div>
+            <div>Signed in: {session.user.name}</div>
             <SignOutButton />
           </>
-         ) : (
+        ) : (
           <SignInButton />
-         )}
+        )}
       </div>
     </div>
   );

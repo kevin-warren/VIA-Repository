@@ -21,10 +21,16 @@ export default function CredentialsLoginForm() {
       password,
     });
 
+    // if (res?.error) {
+    //   setError("Invalid email or password");
+    // } else {
+    //   router.push("/");
+    // }
     if (res?.error) {
       setError("Invalid email or password");
     } else {
-      router.push("/");
+      // Instead of router.push("/")
+      window.location.href = "/"; // ← full page reload ensures auth() reflects session
     }
   };
 

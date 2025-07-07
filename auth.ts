@@ -81,15 +81,23 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
           where: { email },
         });
 
+        console.log("DB user found:", dbUser);
+
         // User not found or no password set (e.g., Google-only user)
-        if (!dbUser?.password) return null;
+        if (!dbUser?.password) {
+            console.log("No user or no password set");
+            return null;
+        }
 
         // Check password with bcrypt
         const isValidPassword = await bcrypt.compare(password, dbUser.password);
+        console.log("Password valid:", isValidPassword);
+
         if (!isValidPassword) return null;
 
         // Strip password before returning user
         const { password: _, ...userWithoutPassword } = dbUser;
+        console.log("Returning user:", userWithoutPassword);
         return userWithoutPassword;
       },
     }),
@@ -100,12 +108,31 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
     }),
   ],
   adapter: PrismaAdapter(prisma),
-
   session: {
-    strategy: 'jwt',
+    strategy: "jwt",
   },
-
   secret: process.env.NEXTAUTH_SECRET,
+
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+        token.name = user.name;
+        token.email = user.email;
+      }
+      console.log("JWT callback: token = ", token);
+      return token;
+    },
+    async session({ session, token }) {
+      if (token) {
+        session.user.id = token.id as string;
+        session.user.name = token.name as string;
+        session.user.email = token.email as string;
+      }
+      console.log("Final session = ", session);
+      return session;
+    },
+  },
 });
 
 // export async function loginIsRequiredServer() {

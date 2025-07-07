@@ -60,7 +60,7 @@
 
 // import { SignInButton } from "../ui/sign-in-button";
 
-
+import Link from 'next/link';
 import styles from "../ui/styles/LoginForm.module.css";
 import CredentialsLoginForm from "../ui/CredentialsLoginForm";
 import GoogleLoginForm from "../ui/GoogleLoginForm";
@@ -73,6 +73,9 @@ export default function LoginPage() {
         <GoogleLoginForm />
         <span className={styles.orText}>Or</span>
         <CredentialsLoginForm />
+        <Link href="/register" className={styles.link}>
+            Create Account
+        </Link>
       </div>
     </div>
   );

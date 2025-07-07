@@ -2,12 +2,12 @@
 
 import { useState } from "react";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+//import { useRouter } from "next/navigation";
 
 import styles from "./styles/LoginForm.module.css";
 
 export default function CredentialsLoginForm() {
-  const router = useRouter();
+  //const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");

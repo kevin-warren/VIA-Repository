@@ -1,0 +1,22 @@
+/* app/ui/styles/Header.module.css */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #f9fafb;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .authControls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  

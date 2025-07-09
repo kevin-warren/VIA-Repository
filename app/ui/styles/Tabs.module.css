@@ -1,7 +1,8 @@
 .tabButtons {
   display: flex;
   gap: 1rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
+  width: 45%;
 }
 
 .tab {
@@ -21,4 +22,35 @@
 .activeTab {
   background-color: #ffffff;
   border-color: #000000;
+}
+
+
+
+.jobLayout {
+  display: flex;
+  gap: 1rem;
+  overflow: hidden;
+}
+
+.postList {
+  width: 50%;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.postDetail {
+  width: 50%;
+  background: #f9fafb;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  /* height: calc(80vh);  */
+  overflow-y: auto;
+}
+
+.postDetailText {
+  font-size: 1rem;
+  color: #374151;
+  line-height: 3;
+  text-align: center;
 }

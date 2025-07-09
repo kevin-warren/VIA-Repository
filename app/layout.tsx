@@ -5,6 +5,7 @@ import "./ui/styles/globals.css";
 import SideNav from "./ui/components/sidenav";
 import styles from "./ui/styles/layout.module.css";
 import { ClientSessionProvider } from "./ui/components/ClientSessionProvider";
+import Header from "./ui/components/Header";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
@@ -21,11 +22,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <ClientSessionProvider>
-          <div className={styles.layout}>
-            <div className={styles.sideNav}>
-              <SideNav />
+          <div className={styles.wrapper}>
+            <Header />
+            <div className={styles.layout}>
+              <div className={styles.sideNav}>
+                <SideNav />
+              </div>
+              <main className={styles.mainContent}>
+                {children}
+              </main>
             </div>
-            <main className={styles.mainContent}>{children}</main>
           </div>
         </ClientSessionProvider>
       </body>

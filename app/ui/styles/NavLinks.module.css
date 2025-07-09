@@ -1,9 +1,9 @@
-.navLink {
+/* .navLink {
   display: flex;
   height: 48px;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 1rem;
   border-radius: 0.5rem;
   background-color: #f9fafb;
   padding: 0.75rem;
@@ -20,6 +20,27 @@
 
 .linkText {
   display: none;
+} */
+
+.linkButtonWrapper {
+  margin-bottom: 1rem;  
+}
+
+.linkButton {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #d1d5db;
+  background-color: #ffffff;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  text-decoration: none;
+  display: block;
+}
+
+.linkButton:hover {
+  background-color: #f3f4f6;
 }
 
 @media (min-width: 768px) {

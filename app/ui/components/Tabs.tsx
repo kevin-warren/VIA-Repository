@@ -7,14 +7,20 @@ import Profile from './profiles/Profile';
 import styles from '../styles/Tabs.module.css';
 
 interface TabProps {
-  posts: { id: string; title: string; content: string; date: string; author: string; }[];
-  profiles: { id: string; name: string; bio: string; date: string; }[];
+  posts: { id: string; title: string; content: string; date: string; author: string }[];
+  profiles: { id: string; name: string; bio: string; date: string }[];
 }
 
 export default function Tabs({ posts, profiles }: TabProps) {
   const searchParams = useSearchParams();
   const initialTab = searchParams.get('tab') === 'profiles' ? 'profiles' : 'jobs';
   const [activeTab, setActiveTab] = useState<'jobs' | 'profiles'>(initialTab);
+
+  const [selectedPostId, setSelectedPostId] = useState<string | null>(null);
+  const selectedPost = posts.find((p) => p.id === selectedPostId);
+
+  const [selectedProfileId, setSelectedProfileId] = useState<string | null>(null);
+  const selectedProfile = profiles.find((p) => p.id === selectedProfileId);
 
   useEffect(() => {
     const tab = searchParams.get('tab');
@@ -40,35 +46,51 @@ export default function Tabs({ posts, profiles }: TabProps) {
         </button>
       </div>
 
-      <section>
-        {activeTab === 'jobs' ? (
-          <>
-            {/* <h2>Job Postings</h2> */}
-            {posts?.map((post) => (
-              <Post
-                key={post.id}
-                id={post.id}
-                title={post.title}
-                content={post.content}
-                date={post.date}
-              />
+      {activeTab === 'jobs' ? (
+        <div className={styles.jobLayout}>
+          <div className={styles.postList}>
+            {posts.map((post) => (
+              <div key={post.id} onClick={() => setSelectedPostId(post.id)}>
+                <Post {...post} />
+              </div>
             ))}
-          </>
-        ) : (
-          <>
-            {/* <h2>Profile Postings</h2> */}
-            {profiles?.map((profile) => (
-              <Profile
-                key={profile.id}
-                id={profile.id}
-                name={profile.name}
-                bio={profile.bio}
-                date={profile.date}
-              />
+          </div>
+
+          <div className={styles.postDetail}>
+            {selectedPost ? (
+              <>
+                <h2>{selectedPost.title}</h2>
+                <p>{selectedPost.date}</p>
+                <p>{selectedPost.content}</p>
+              </>
+            ) : (
+              <p className={styles.postDetailText}>Select a post to view details</p>
+            )}
+          </div>
+        </div>
+      ) : (
+        <div className={styles.jobLayout}>
+          <div className={styles.postList}>
+            {profiles.map((profile) => (
+              <div key={profile.id} onClick={() => setSelectedProfileId(profile.id)}>
+                <Profile {...profile} />
+              </div>
             ))}
-          </>
-        )}
-      </section>
+          </div>
+
+          <div className={styles.postDetail}>
+            {selectedProfile ? (
+              <>
+                <h2>{selectedProfile.name}</h2>
+                <p>{selectedProfile.date}</p>
+                <p>{selectedProfile.bio}</p>
+              </>
+            ) : (
+              <p className={styles.postDetailText}>Select a profile to view details</p>
+            )}
+          </div>
+        </div>
+      )}
     </>
   );
 }

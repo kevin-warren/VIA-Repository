@@ -11,14 +11,15 @@ import {
 //import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 //import clsx from 'clsx';
+
 import styles from '../styles/NavLinks.module.css';
 
 
 const links = [
-  { name: 'Repository', 
-    href: '/', 
-    icon: HomeIcon 
-  },
+  // { name: 'Repository', 
+  //   href: '/', 
+  //   icon: HomeIcon 
+  // },
   {
     name: 'Create New Job Post',
     href: "/post/insert",
@@ -35,18 +36,13 @@ export default function NavLinks() {
   //const pathname = usePathname();
   return (
     <>
-      {links.map((link) => {
-        //const LinkIcon = link.icon;
-        return (
-          <Link
-            key={link.name}
-            href={link.href}
-            className={styles.navLink}
-          >
-            <p className={styles.linkText}>{link.name}</p>
+      {links.map((link) => (
+        <div className={styles.linkButtonWrapper} key={link.name}>
+          <Link href={link.href} className={styles.linkButton}>
+            <div>{link.name}</div>
           </Link>
-        );
-      })}
+        </div>
+      ))}
 
     </>
   );

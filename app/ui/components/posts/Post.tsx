@@ -1,21 +1,4 @@
-// import React, { JSX } from 'react';
-
-
-/*import Link from 'next/link';
-
-export default function Component({ id, title, content, date }: { id: string, title: string, content: string, date: string }) {
-    return (
-        <div key={id} className="border border-gray-200 p-4 my-4">
-            <Link href={`/post/${id}`}>
-                <h2>{title}</h2>
-            </Link>
-            <p className="text-gray-500">{date}</p>
-            <p>{content}</p>
-        </div>
-    );
-}
-*/
-
+// app/ui/components/Post.tsx
 import Link from 'next/link';
 import styles from '../../styles/Post.module.css';
 
@@ -31,20 +14,20 @@ export default function Component({
   date: Date | string;
 }) {
   return (
-    //<div className={styles.wrapper}>
-      <div key={id} className={styles.jobPosting}>
-      <div className={styles.container}>
-        <Link href={`/post/${id}`} className={styles.jobTitle}>
-          <h2>{title}</h2>
-        </Link>
-        <button className = {styles.tab}>
-          Apply
-        </button>
+    <div className={styles.wrapper}>  
+      <div className={styles.jobPosting}>
+        <div className={styles.container}>
+          <div className={styles.jobTitle}>
+            <h2>{title}</h2>
+          </div>
+          <button className={styles.tab}>Apply</button>
+        </div>
+        <p className={styles.jobDate}>
+          {date instanceof Date ? date.toISOString().split('T')[0] : date}
+        </p>
+        <p className={styles.jobDescription}>{content}</p>
       </div>
-      <p className={styles.jobDate}>{date instanceof Date ? date.toISOString().split('T')[0] : date}</p>
-      <p className={styles.jobDescription}>{content}</p>
-      </div>
-    //</div>
+    </div>
+
   );
 }
-

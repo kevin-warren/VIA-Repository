@@ -1,6 +1,9 @@
 .wrapper {
   display: flex;
-  justify-content: center; 
+  justify-content: left; 
+  width: 100%;
+  /* padding-right: 1rem; */
+  overflow: hidden;
 }
 
 .jobPosting {
@@ -10,7 +13,7 @@
   margin-bottom: 1rem;
   background-color: #f9fafb;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  width: 85%;
+  width: 100%;
 }
 
 .jobPosting:hover {

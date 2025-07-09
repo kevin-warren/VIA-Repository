@@ -1,18 +1,41 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; 
+  overflow: hidden;
+} 
+
 .layout {
   display: flex;
-  height: 100vh;
+  flex: 1;
   overflow: hidden;
+}
+
+.header {
+  height: 60px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
+.sideNav {
+  width: 240px;
+  flex-shrink: 0;
+  background-color: #f9fafb;
+  /* padding: 1rem; */
+  overflow: hidden;  /* ✅ Prevent horizontal scroll */
+  box-sizing: border-box; /* ✅ Make padding not exceed width */
+  border-right: 1px solid #ddd;
 }
 
 .mainContent {
   flex-grow: 1;
-  overflow-y: auto;
+  overflow: hidden;
   padding: 1rem;
-
-}
-
-.sideNav {
-  width: 240px;       /* Fixed width for sidebar */
-  flex-shrink: 0;     /* Prevent it from shrinking or expanding */
-  background-color: #f9fafb; /* Optional */
+  width: 100%;
+  box-sizing: border-box;
 }

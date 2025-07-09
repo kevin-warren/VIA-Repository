@@ -14,9 +14,9 @@ export default function Profile({
 }) {
   return (
     <div className={styles.profileCard}>
-      <Link href={`/profile/${id}`} className={styles.profileName}>
+      <div className={styles.profileName}>
         <h2>{name}</h2>
-      </Link>
+      </div>
       <p className={styles.profileDate}>{date instanceof Date ? date.toISOString().split('T')[0] : date}</p>
       <p className={styles.profileBio}>{bio}</p>
     </div>

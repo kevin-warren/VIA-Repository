@@ -1,13 +1,13 @@
-// app/ui/components/Post.tsx
+// import Link from 'next/link';
 import styles from '../../styles/Post.module.css';
 
 export default function Component({
-  // id,
+  id,
   title,
   content,
   date,
 }: {
-  // id: string;
+  id: string;
   title: string;
   content: string;
   date: Date | string;

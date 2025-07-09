@@ -1,13 +1,13 @@
-import Link from 'next/link';
+// import Link from 'next/link';
 import styles from '../../styles/Profile.module.css';
 
 export default function Profile({
-  id,
+  // id,
   name,
   bio,
   date,
 }: {
-  id: string;
+  // id: string;
   name: string;
   bio: string;
   date: Date | string;

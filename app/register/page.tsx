@@ -49,7 +49,7 @@
 'use client';
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+//import { useRouter } from "next/navigation";
 import { registerUser } from "../lib/actions/register";
 import styles from "../ui/styles/LoginForm.module.css";
 
@@ -64,9 +64,14 @@ export default function RegisterPage() {
     try {
       await registerUser(formData); // this calls your "use server" action
       // Success: redirect will happen on server via `redirect("/login")`
-    } catch (err: any) {
-      setError(err.message); // Displays "User already exists"
+    } catch (err) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("An unexpected error occurred");
+      }
     }
+    
   }
 
   return (

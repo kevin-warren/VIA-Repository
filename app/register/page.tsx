@@ -54,7 +54,7 @@ import { registerUser } from "../lib/actions/register";
 import styles from "../ui/styles/LoginForm.module.css";
 
 export default function RegisterPage() {
-  const router = useRouter();
+  //const router = useRouter();
   const [error, setError] = useState<string | null>(null);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {

@@ -8,7 +8,7 @@ import styles from '../../ui/styles/InsertForm.module.css';
 
 export default function EditProfilePage() {
   const router = useRouter();
-  const { data: session, status } = useSession();
+  const { data: session, /*status */ } = useSession();
   const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
     id: '',

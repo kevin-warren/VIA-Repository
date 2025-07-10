@@ -36,3 +36,33 @@
   line-height: 1.5;
   margin-bottom: 0;
 }
+
+.viewProfileCard {
+  position: relative; /* enable absolute positioning inside */
+  border: 1px solid #d1d5db;
+  padding: 1.25rem;
+  border-radius: 8px;
+  margin: 0rem auto;
+  background-color: #fefefe;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  width: 50%;
+}
+
+.profileActions {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.profileButton {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #e5e7eb;
+  color: #111827;
+  transition: background-color 0.2s ease;
+}

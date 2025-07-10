@@ -2,8 +2,8 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import { db } from "@vercel/postgres";
-import { posts } from "../src/app/lib/placeholder-data.js";
-import { profiles } from "../src/app/lib/placeholder-profiles.js";
+import { Post } from "../app/lib/placeholder-data.js";
+import { Profile } from "../app/lib/placeholder-profiles.js";
 import bcrypt from "bcrypt";
 
 async function seedPosts(client) {
@@ -23,9 +23,9 @@ async function seedPosts(client) {
     console.log(`Created "posts" table`);
 
     const insertedPosts = await Promise.all(
-      posts.map(async (post) => {
+      Post.map(async (post) => {
         return client.sql`
-        INSERT INTO posts (id, title, content, date, author)
+        INSERT INTO Post (id, title, content, date, author)
         VALUES (${post.id}, ${post.title}, ${post.content}, ${post.date}, ${post.user})
         ON CONFLICT (id) DO NOTHING;
       `;
@@ -55,7 +55,7 @@ async function seedProfiles(client) {
     console.log('Created "profiles" table');
 
     const insertedProfiles = await Promise.all(
-      profiles.map(async (profile) => {
+      Profile.map(async (profile) => {
         return client.sql`
           INSERT INTO profiles (id, name, bio, date)
           VALUES (${profile.id}, ${profile.name}, ${profile.bio}, ${profile.date})
@@ -75,7 +75,7 @@ async function seedProfiles(client) {
 async function seedUsers(client) {
   try {
     const createUsersTable = await client.sql`
-      CREATE TABLE IF NOT EXISTS users (
+      CREATE TABLE IF NOT EXISTS User (
         id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
         name TEXT,
         email TEXT UNIQUE NOT NULL,
@@ -103,7 +103,7 @@ async function seedUsers(client) {
       users.map(async (user) => {
         const hashedPassword = await bcrypt.hash(user.password, 10);
         return client.sql`
-          INSERT INTO users (name, email, password)
+          INSERT INTO User (name, email, password)
           VALUES (${user.name}, ${user.email}, ${hashedPassword})
           ON CONFLICT (email) DO NOTHING;
         `;

@@ -43,11 +43,11 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { id, name, bio, date, author } = body;
+    const { id, name, bio, date, author, userId } = body;
 
     await sql`
-      INSERT INTO "Profile" (id, name, bio, date, author)
-      VALUES (${id}, ${name}, ${bio}, ${date}, ${author});
+      INSERT INTO "Profile" (id, name, bio, date, author, "userId")
+      VALUES (${id}, ${name}, ${bio}, ${date}, ${author}, ${userId});
     `;
 
     return NextResponse.json({ message: 'Profile successfully inserted' }, { status: 200 });

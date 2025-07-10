@@ -2,7 +2,7 @@
 export const dynamic = "force-dynamic";
 
 //import { auth } from "../../../auth";
-import NavLinks from './nav-links';
+import ServerNavLinks from './ServerNavLinks';
 import styles from '../../ui/styles/SideNav.module.css';
 //import { SignInButton } from '../sign-in-button';
 //import { SignOutButton } from '../sign-out-button';
@@ -14,7 +14,7 @@ export default async function SideNav() {
   return (
     <div className={styles.postButtons}>
       <div className={styles.post}>
-        <NavLinks />
+        <ServerNavLinks />
         {/* {session?.user ? (
           <>
             <div>Signed in: {session.user.name}</div>

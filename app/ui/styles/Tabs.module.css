@@ -44,8 +44,9 @@
   padding: 1rem;
   border: 1px solid #ddd;
   border-radius: 8px;
-  /* height: calc(80vh);  */
+  height: calc(80vh); 
   overflow-y: auto;
+  margin-left: 1rem;
 }
 
 .postDetailText {

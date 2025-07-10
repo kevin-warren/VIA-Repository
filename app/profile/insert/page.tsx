@@ -42,6 +42,12 @@ export default function Page() {
         ...formData,
         id: uuid,
         author: session.user.name,
+        userId: session.user.id,
+        // name: formData.name,
+        // bio: formData.bio,
+        // date: formData.date,
+        // author: session.user.name,
+        // userId: session.user.id,
       }),
     });
 

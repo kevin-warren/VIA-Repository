@@ -1,4 +1,4 @@
-export const profiles = [
+export const Profile = [
   {
     id: 'b15f3e1e-1234-4567-8901-abcdefabcdef',
     name: 'Alice Johnson',

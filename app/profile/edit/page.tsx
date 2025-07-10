@@ -1,14 +1,15 @@
+// app/profile/edit/page.tsx
 'use client';
-import { useState } from 'react';
+
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { v4 as uuidv4 } from 'uuid';
 import { useSession } from 'next-auth/react';
 import styles from '../../ui/styles/InsertForm.module.css';
 
-export default function Page() {
+export default function EditProfilePage() {
   const router = useRouter();
-  const { data: session } = useSession();
-
+  const { data: session, status } = useSession();
+  const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
     id: '',
     name: '',
@@ -16,56 +17,49 @@ export default function Page() {
     date: new Date().toISOString().slice(0, 10),
   });
 
+  useEffect(() => {
+    async function fetchProfile() {
+      if (!session?.user?.id) return;
+      const res = await fetch(`/api/profiles/${session.user.id}`);
+      const { profile } = await res.json();
+      setFormData({
+        id: profile.id,
+        name: profile.name,
+        bio: profile.bio,
+        date: profile.date.slice(0, 10),
+      });
+      setLoading(false);
+    }
+    fetchProfile();
+  }, [session]);
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const uuid = uuidv4();
-
-    if (!session?.user?.name) {
-      alert("Must be signed in to submit a profile.");
-      return;
-    }
-
     await fetch('/api/profiles', {
-      method: 'POST',
+      method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         ...formData,
-        id: uuid,
-        author: session.user.name,
-        userId: session.user.id,
-        // name: formData.name,
-        // bio: formData.bio,
-        // date: formData.date,
-        // author: session.user.name,
-        // userId: session.user.id,
+        author: session?.user?.name,
+        userId: session?.user?.id,
       }),
     });
-
-    setFormData({
-      id: '',
-      name: '',
-      bio: '',
-      date: '',
-    });
-
     router.push('/?tab=profiles');
-    router.refresh(); // ✅ This ensures SSR parts update (just in case)
   };
+
+  if (loading) return <div>Loading profile...</div>;
 
   return (
     <main className={styles.pageWrapper}>
       <div className={styles.container}>
-        <h2 className={styles.heading}>Create New Profile</h2>
+        <h2 className={styles.heading}>Edit Profile</h2>
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.formGroup}>
             <label htmlFor="name" className={styles.label}>Name:</label>
@@ -100,9 +94,7 @@ export default function Page() {
               className={styles.input}
             />
           </div>
-          <div>
-          <button type="submit" className={styles.button}>Submit</button>
-          </div>
+          <button type="submit" className={styles.button}>Update</button>
         </form>
       </div>
     </main>

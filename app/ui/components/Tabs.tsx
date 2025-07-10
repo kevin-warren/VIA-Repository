@@ -3,7 +3,7 @@
 import { useSearchParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import Post from './posts/Post';
-import Profile from './profiles/Profile';
+import Profile from './profiles/ProfileList';
 import styles from '../styles/Tabs.module.css';
 
 interface TabProps {

@@ -1,5 +1,5 @@
 import { sql } from '@vercel/postgres';
-import Profile from '../../ui/components/profiles/Profile';
+import Profile from '../../ui/components/profiles/ViewProfile';
 
 export const dynamic = "force-dynamic";
 

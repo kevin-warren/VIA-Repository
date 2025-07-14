@@ -156,7 +156,7 @@ export default function RegisterPage() {
       }
 
       router.push("/login");
-    } catch (err) {
+    } catch {
       setError("Something went wrong. Please try again.");
     }
   }

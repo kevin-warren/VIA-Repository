@@ -46,32 +46,119 @@
 //   );
 // }
 
+// 'use client';
+
+// import { useState } from "react";
+// //import { useRouter } from "next/navigation";
+// import { registerUser } from "../lib/actions/register";
+// import styles from "../ui/styles/LoginForm.module.css";
+
+// export default function RegisterPage() {
+//   //const router = useRouter();
+//   const [error, setError] = useState<string | null>(null);
+
+//   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+//     e.preventDefault();
+//     const formData = new FormData(e.currentTarget);
+
+//     try {
+//       await registerUser(formData); // this calls your "use server" action
+//       // Success: redirect will happen on server via `redirect("/login")`
+//     } catch (err) {
+//       if (err instanceof Error) {
+//         setError(err.message);
+//       } else {
+//         setError("An unexpected error occurred");
+//       }
+//     }
+    
+//   }
+
+//   return (
+//     <div className={styles.wrapper}>
+//       <div className={styles.card}>
+//         <h1 className={styles.heading}>Create Account</h1>
+
+//         <form onSubmit={handleSubmit} className={styles.form}>
+//           <input
+//             type="text"
+//             name="name"
+//             placeholder="Name"
+//             required
+//             className={styles.input}
+//           />
+//           <input
+//             type="email"
+//             name="email"
+//             placeholder="Email"
+//             required
+//             className={styles.input}
+//           />
+//           <input
+//             type="password"
+//             name="password"
+//             placeholder="Password"
+//             required
+//             className={styles.input}
+//           />
+
+//           <button type="submit" className={styles.button}>
+//             Create Account
+//           </button>
+
+//           {/* 🔴 Error message display */}
+//           {error && <p className={styles.error}>{error}</p>}
+//         </form>
+
+//         <p className={styles.orText}>
+//           Already have an account?{" "}
+//           <a href="/login" className={styles.link}>
+//             Sign In
+//           </a>
+//         </p>
+//       </div>
+//     </div>
+//   );
+// }
+
 'use client';
 
 import { useState } from "react";
-//import { useRouter } from "next/navigation";
-import { registerUser } from "../lib/actions/register";
+import { useRouter } from "next/navigation";
 import styles from "../ui/styles/LoginForm.module.css";
 
 export default function RegisterPage() {
-  //const router = useRouter();
+  const router = useRouter();
   const [error, setError] = useState<string | null>(null);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
 
+    const name = formData.get("name");
+    const email = formData.get("email");
+    const password = formData.get("password");
+
     try {
-      await registerUser(formData); // this calls your "use server" action
-      // Success: redirect will happen on server via `redirect("/login")`
-    } catch (err) {
-      if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError("An unexpected error occurred");
+      const res = await fetch("/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, password }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error || "An error occurred");
+        return;
       }
+
+      router.push("/login");
+    } catch (err) {
+      setError("Something went wrong. Please try again.");
     }
-    
   }
 
   return (
@@ -80,6 +167,8 @@ export default function RegisterPage() {
         <h1 className={styles.heading}>Create Account</h1>
 
         <form onSubmit={handleSubmit} className={styles.form}>
+          {error && <span className={styles.error}>{error}</span>}
+
           <input
             type="text"
             name="name"
@@ -105,9 +194,6 @@ export default function RegisterPage() {
           <button type="submit" className={styles.button}>
             Create Account
           </button>
-
-          {/* 🔴 Error message display */}
-          {error && <p className={styles.error}>{error}</p>}
         </form>
 
         <p className={styles.orText}>

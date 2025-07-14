@@ -1,11 +1,17 @@
 /* app/ui/styles/Header.module.css */
 
 .header {
+    height: auto; /* Adjust as needed */
+    background-image: url('/images/logo-3.jpg');
+    background-size: cover;
+    background-position: 0% 40%;
+    background-repeat: no-repeat;
+
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: top;
     padding: 1rem;
-    background-color: #f9fafb;
+    /* background-color: #f9fafb; */
     border-bottom: 1px solid #ddd;
   }
   
@@ -15,8 +21,7 @@
   }
   
   .authControls {
-    display: flex;
-    align-items: center;
+    /* display: flex; */
+    /* align-items: center; */
     gap: 1rem;
   }
-  

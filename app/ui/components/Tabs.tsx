@@ -62,11 +62,11 @@ export default function Tabs({ posts, profiles }: TabProps) {
                 <h2>{selectedPost.title}</h2>
                 <p>{selectedPost.date}</p>
                 <p>{selectedPost.content}</p>
-              </>
-            ) : (
-              <p className={styles.postDetailText}>Select a post to view details</p>
-            )}
-          </div>
+                </>
+              ) : (
+                <p className={styles.postDetailText}>Select a post to view details</p>
+              )}
+          </div>            
         </div>
       ) : (
         <div className={styles.jobLayout}>
@@ -88,7 +88,7 @@ export default function Tabs({ posts, profiles }: TabProps) {
             ) : (
               <p className={styles.postDetailText}>Select a profile to view details</p>
             )}
-          </div>
+            </div>
         </div>
       )}
     </>

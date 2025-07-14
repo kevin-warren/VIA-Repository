@@ -11,12 +11,12 @@ interface NavLinksClientProps {
 export default function NavLinksClient({ hasProfile }: NavLinksClientProps) {
   const links = [
     {
-      name: 'Create New Job Post',
+      name: 'Create Job Post',
       href: '/post/insert',
     },
     // Conditionally show profile creation link
     !hasProfile && {
-      name: 'Create New Profile',
+      name: 'Create Profile Post',
       href: '/profile/insert',
     },
   ].filter(Boolean) as { name: string; href: string }[];

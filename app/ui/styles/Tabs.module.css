@@ -30,12 +30,14 @@
   display: flex;
   gap: 1rem;
   overflow: hidden;
+  overflow: visible;
+  position: relative;
 }
 
 .postList {
   width: 50%;
-  max-height: 80vh;
   overflow-y: auto;
+  height: calc(100vh - 140px - 15px);
 }
 
 .postDetail {
@@ -44,9 +46,14 @@
   padding: 1rem;
   border: 1px solid #ddd;
   border-radius: 8px;
-  height: calc(80vh); 
   overflow-y: auto;
   margin-left: 1rem;
+  margin-top: -3rem;
+  height: calc(100vh - 140px);
+}
+
+.postDetail h2 {
+  margin-top: 0;
 }
 
 .postDetailText {
@@ -54,4 +61,31 @@
   color: #374151;
   line-height: 3;
   text-align: center;
+}
+
+.postList::-webkit-scrollbar,
+.postDetail::-webkit-scrollbar {
+  width: 10px;
+}
+
+.postList::-webkit-scrollbar-track,
+.postDetail::-webkit-scrollbar-track {
+  background: #f9fafb; /* Matches your background */
+}
+
+.postList::-webkit-scrollbar-thumb,
+.postDetail::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1; /* Light gray thumb */
+  border-radius: 6px;
+}
+
+.postList::-webkit-scrollbar-thumb:hover,
+.postDetail::-webkit-scrollbar-thumb:hover {
+  background-color: #94a3b8; /* Darker on hover */
+}
+
+/* Firefox support */
+.postList, .postDetail {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 #f9fafb;
 }

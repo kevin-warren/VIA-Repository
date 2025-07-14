@@ -42,7 +42,7 @@ export function SignOutButton({ userName }: Props) {
   return (
     <div className={styles.dropdown} ref={menuRef}>
       <button onClick={() => setOpen(prev => !prev)} className={styles.profileButton}>
-        Profile
+        My Profile
       </button>
 
       {open && (

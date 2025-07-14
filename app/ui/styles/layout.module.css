@@ -3,6 +3,7 @@
   flex-direction: column;
   height: 100vh; 
   overflow: hidden;
+  flex: 1;
 } 
 
 .layout {
@@ -26,7 +27,6 @@
   width: 240px;
   flex-shrink: 0;
   background-color: #f9fafb;
-  /* padding: 1rem; */
   overflow: hidden;  /* ✅ Prevent horizontal scroll */
   box-sizing: border-box; /* ✅ Make padding not exceed width */
   border-right: 1px solid #ddd;
@@ -38,4 +38,10 @@
   padding: 1rem;
   width: 100%;
   box-sizing: border-box;
-}
+} 
+
+
+
+
+
+

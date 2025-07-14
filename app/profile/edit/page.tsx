@@ -94,7 +94,9 @@ export default function EditProfilePage() {
               className={styles.input}
             />
           </div>
-          <button type="submit" className={styles.button}>Update</button>
+          <div>
+            <button type="submit" className={styles.button}>Update</button>
+          </div>
         </form>
       </div>
     </main>

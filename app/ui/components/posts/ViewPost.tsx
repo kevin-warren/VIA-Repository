@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useSession } from 'next-auth/react';
+// import { useSession } from 'next-auth/react';
 import styles from '../../styles/Post.module.css';
 
 export default function ViewPost({

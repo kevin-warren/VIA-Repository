@@ -37,7 +37,7 @@ export async function connectToDB() {
 export async function getPosts(): Promise<Post[]> {
   try {
     noStore();
-    const data = await sql<Post>`SELECT * FROM "Post" ORDER BY date ASC`;
+    const data = await sql<Post>`SELECT * FROM "Post" ORDER BY date DESC`;
     return data.rows.map(post => ({
       ...post,
       date: new Date(post.date).toISOString().split('T')[0] // Convert Date to YYYY-MM-DD format
@@ -51,7 +51,7 @@ export async function getPosts(): Promise<Post[]> {
 export async function getProfiles(): Promise<Profile[]> {
   try {
     noStore();
-    const data = await sql<Profile>`SELECT * FROM "Profile" ORDER BY date ASC`;
+    const data = await sql<Profile>`SELECT * FROM "Profile" ORDER BY date DESC`;
     return data.rows.map(profile => ({
       ...profile,
       date: new Date(profile.date).toISOString().split('T')[0] // Convert Date to YYYY-MM-DD format

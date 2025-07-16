@@ -5,6 +5,8 @@ import { useState, useEffect } from 'react';
 import Post from './posts/Post';
 import Profile from './profiles/ProfileList';
 import styles from '../styles/Tabs.module.css';
+import ViewPost from './posts/ViewPost';
+
 
 interface TabProps {
   posts: { id: string; title: string; content: string; date: string; author: string }[];
@@ -59,10 +61,17 @@ export default function Tabs({ posts, profiles }: TabProps) {
           <div className={styles.postDetail}>
             {selectedPost ? (
               <>
+                {/* <p id={selectedPost.id}></p>   */}
                 <h2>{selectedPost.title}</h2>
                 <p>{selectedPost.date}</p>
                 <p>{selectedPost.content}</p>
                 </>
+              // <ViewPost
+              //   id={selectedPost.id}          // ← here
+              //   title={selectedPost.title}
+              //   content={selectedPost.content}
+              //   date={selectedPost.date}
+              // />
               ) : (
                 <p className={styles.postDetailText}>Select a post to view details</p>
               )}

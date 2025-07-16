@@ -17,6 +17,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   profile       Profile?
+  post          Post[]
   Authenticator Authenticator[]
 }
 
@@ -81,14 +82,16 @@ model Post {
   content String
   date    String
   author  String
+  userId  String
+  user    User   @relation(fields: [userId], references: [id])
 }
 
 model Profile {
   id     String   @id @default(cuid())
+  userId String   @unique
   name   String
   bio    String
   date   DateTime @default(now())
   author String
-  userId String   @unique
   user   User     @relation(fields: [userId], references: [id])
 }

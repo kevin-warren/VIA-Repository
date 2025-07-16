@@ -1,18 +1,13 @@
-// 'use client';
-// // import { login } from "../lib/actions/auth";
-// import Link from "next/link";
-
-
-// export const SignInButton = () => {
-//   return ( 
-//     <Link href="/login">
-//       Sign In
-//     </Link>
-// )};
-
-import Link from "next/link";
-import styles from "../ui/styles/Tabs.module.css";
+'use client';
+import styles from '../ui/styles/SignOutDropdown.module.css';
+import { useRouter } from 'next/navigation';
 
 export function SignInButton() {
-  return <Link href="/login" className={styles.tab}>Sign In</Link>;
+  const router = useRouter();
+  return (
+    <div className={styles.dropdown}>
+      <button onClick={() => router.push('/login')} className={styles.profileButton}>Sign In</button>
+    </div>
+  );
 }
+

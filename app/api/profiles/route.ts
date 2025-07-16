@@ -15,10 +15,8 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { id, name, bio, date, author, userId } = body;
 
-    await sql`
-      INSERT INTO "Profile" (id, name, bio, date, author, "userId")
-      VALUES (${id}, ${name}, ${bio}, ${date}, ${author}, ${userId});
-    `;
+    await sql`INSERT INTO "Profile" (id, name, bio, date, author, "userId")
+      VALUES (${id}, ${name}, ${bio}, ${date}, ${author}, ${userId});`;
 
     return NextResponse.json({ message: 'Profile successfully inserted' }, { status: 200 });
   } catch (error) {

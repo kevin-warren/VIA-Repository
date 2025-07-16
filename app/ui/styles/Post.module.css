@@ -60,3 +60,58 @@
   background-color: #f3f4f6;
 }
 
+/* For "My Post(s)" */
+.viewPostCard {
+  position: relative; /* enable absolute positioning inside */
+  border: 1px solid #d1d5db;
+  padding: 1.25rem;
+  border-radius: 8px;
+  margin: 0rem auto;
+  background-color: #fefefe;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  width: 50%;
+  margin-bottom: 1rem;
+}
+
+.postActions {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.postButton {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #e5e7eb;
+  color: #111827;
+  transition: background-color 0.2s ease;
+}
+
+.postName h2{
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+  text-decoration: none;
+  display: inline-block;
+  transition: color 0.2s ease;
+  
+}
+
+.postDate {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-bottom: 0.75rem;
+}
+
+.postContent {
+  font-size: 1rem;
+  color: #374151;
+  line-height: 1.5;
+  margin-bottom: 0;
+}

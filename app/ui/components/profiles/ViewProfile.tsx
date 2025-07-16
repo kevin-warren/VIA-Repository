@@ -37,7 +37,7 @@ export default function ViewProfile({
       body: JSON.stringify({ userId: session?.user?.id }),
     });
 
-    router.push('/');
+    router.push('/?tab=profiles');
     router.refresh();       
   };
 

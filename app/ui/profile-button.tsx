@@ -39,6 +39,23 @@ export function SignOutButton({ userName }: Props) {
     }
   };
 
+  // const handleViewPosts = async () => {
+  //   if (!session?.user?.id) return;
+
+  //   const res = await fetch(`/api/posts/${session.user.id}`);
+  //   const data = await res.json();
+
+  //   if (res.ok && data.post) {
+  //     router.push(`/posts/myposts`); //this should be changed now to new route
+  //   } else {
+  //     router.push('/post/insert');
+  //   }
+  // };
+  const handleViewPosts = () => {
+    router.push('/posts/myposts');
+  };
+  
+  
   return (
     <div className={styles.dropdown} ref={menuRef}>
       <button onClick={() => setOpen(prev => !prev)} className={styles.profileButton}>
@@ -50,6 +67,9 @@ export function SignOutButton({ userName }: Props) {
           <div className={styles.signedIn}>Signed in: {userName}</div>
           <button onClick={handleViewProfile} className={styles.menuItem}>
             View Profile
+          </button>
+          <button onClick={handleViewPosts} className={styles.menuItem}>
+            View Job Posts
           </button>
           <form action={logout}>
             <button type="submit" className={styles.menuItem}>Sign Out</button>

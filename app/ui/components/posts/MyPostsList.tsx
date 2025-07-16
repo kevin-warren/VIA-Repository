@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import ViewPost from './ViewPost';
+import styles from '../../styles/Post.module.css';
 
 type Post = {
   id: string;
@@ -43,7 +44,7 @@ export default function MyPostsList() {
   if (!posts.length) return <p>You have no posts yet.</p>;
 
   return (
-    <div>
+    <div className={styles.scrollContainer}>
       {posts.map((post) => (
         <ViewPost
           key={post.id}

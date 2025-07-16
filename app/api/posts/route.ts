@@ -32,7 +32,7 @@ import { NextResponse } from 'next/server';
 
 export async function GET() {
   try {
-    const posts = await sql`SELECT * FROM "Post" ORDER BY date ASC;`;
+    const posts = await sql`SELECT * FROM "Post" ORDER BY date DESC;`;
     return NextResponse.json({ posts }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });

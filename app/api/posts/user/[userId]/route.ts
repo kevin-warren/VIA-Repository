@@ -8,7 +8,7 @@ export async function GET(
   try {
     const userId = params.userId;
     const result = await sql`
-      SELECT * FROM "Post" WHERE "userId" = ${userId} ORDER BY date ASC;
+      SELECT * FROM "Post" WHERE "userId" = ${userId} ORDER BY date DESC;
     `;
 
     const posts = result.rows;

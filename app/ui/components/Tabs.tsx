@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import Post from './posts/Post';
 import Profile from './profiles/ProfileList';
 import styles from '../styles/Tabs.module.css';
-import ViewPost from './posts/ViewPost';
+// import ViewPost from './posts/ViewPost';
 
 
 interface TabProps {

@@ -15,7 +15,7 @@ export default function ViewPost({
   content: string;
   date: Date | string;
 }) {
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
   const router = useRouter();
 
   const handleEdit = () => {

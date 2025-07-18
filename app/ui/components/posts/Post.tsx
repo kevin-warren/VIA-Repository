@@ -22,7 +22,7 @@ export default function Component({
       <div className={styles.jobPosting}>
         <div className={styles.jobTitle}>
           <h2>{title}</h2>
-          <img src={logo} />
+          {/* <img src={logo} /> */}
         </div>
         <p className={styles.jobDescription}>{company}</p>
         <p className={styles.jobDescription}>{jobType}, {presence}</p>

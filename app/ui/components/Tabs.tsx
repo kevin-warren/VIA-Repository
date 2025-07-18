@@ -201,7 +201,7 @@ export default function Tabs({ posts, profiles }: TabProps) {
                 </div>
 
                 <h2>{selectedPost.title}</h2>
-                <img src={selectedPost.logo} />
+                {/* <img src={selectedPost.logo} /> */}
                 <p><strong>Company:</strong> {selectedPost.company}</p>
                 <p><strong>Category:</strong> {selectedPost.category}</p>
                 <p><strong>Date Posted:</strong> {selectedPost.date}</p>

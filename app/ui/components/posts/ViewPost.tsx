@@ -143,7 +143,7 @@ export default function ViewPost({
       </div>
       <div className={styles.jobTitle}>
         <h2>{title}</h2>
-        <img src={logo} />
+        {/* <img src={logo} /> */}
       </div>
       <p className={styles.jobDescription}>{company}</p>
       <p className={styles.jobDescription}>{jobType}, {presence}</p>

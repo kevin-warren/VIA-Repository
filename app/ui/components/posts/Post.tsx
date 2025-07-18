@@ -3,7 +3,7 @@ import styles from '../../styles/Post.module.css';
 export default function Component({
   title,
   company,
-  logo,
+  // logo,
   location,
   jobType,
   presence,
@@ -11,7 +11,7 @@ export default function Component({
 }: {
   title: string;
   company: string;
-  logo: string;
+  // logo: string;
   location: string;
   jobType: string;
   presence: string;

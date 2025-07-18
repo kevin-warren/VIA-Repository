@@ -77,13 +77,27 @@ model Authenticator {
 }
 
 model Post {
-  id      String @id @default(cuid())
-  title   String @unique
-  content String
-  date    String
-  author  String
-  userId  String
-  user    User   @relation(fields: [userId], references: [id])
+  id             String    @id @default(uuid())
+  title          String
+  company        String
+  logo           String
+  category       String
+  date           DateTime
+  location       String
+  pay            String?
+  presence       String? // e.g., Remote, Hybrid, On-site
+  jobType        String? // e.g., Full-time, Part-time, Internship
+  jobDescription String?
+  startDate      DateTime?
+  endDate        DateTime?
+  summary        String?
+  duties         String
+  qualifications String
+
+  author    String
+  userId    String
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
 }
 
 model Profile {

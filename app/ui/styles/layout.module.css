@@ -26,7 +26,7 @@
 .sideNav {
   width: 240px;
   flex-shrink: 0;
-  background-color: #f9fafb;
+  background-color: #f3f4f6;
   overflow: hidden;  /* ✅ Prevent horizontal scroll */
   box-sizing: border-box; /* ✅ Make padding not exceed width */
   border-right: 1px solid #ddd;

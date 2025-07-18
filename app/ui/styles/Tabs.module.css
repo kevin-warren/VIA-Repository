@@ -43,13 +43,13 @@
 .postDetail {
   width: 50%;
   background: #f9fafb;
-  padding: 1rem;
+  padding: 2rem;
   border: 1px solid #ddd;
   border-radius: 8px;
   overflow-y: auto;
   margin-left: 1rem;
   margin-top: -3rem;
-  height: calc(100vh - 140px);
+  height: calc(100vh - 180px);
 }
 
 .postDetail h2 {
@@ -88,4 +88,56 @@
 .postList, .postDetail {
   scrollbar-width: thin;
   scrollbar-color: #cbd5e1 #f9fafb;
+}
+
+.postSection {
+  margin-top: 1rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+
+
+
+.detailWrapper {
+  position: relative;
+  padding-top: 2rem;
+}
+
+.jobPosting {
+  position: relative;
+  /* border: 1px solid #d1d5db; */
+  /* padding: 1.25rem; */
+  /* border-radius: 8px; */
+  /* margin-bottom: 1rem; */
+  background-color: #f9fafb;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+}
+
+.applyButtonWrapper {
+  position: absolute;
+  /* top: 1rem; */
+  right: 0rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+}
+
+.applyButtonWrapper .tab {
+  background-color: #ffffff;
+  color: black;
+  border: none;
+  border-radius: 0.375rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.applyButtonWrapper .tab:hover {
+  background-color: #f3f4f6;
+}
+
+.jobPosting h2 {
+  width: 85%;
 }

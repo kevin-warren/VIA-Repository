@@ -3,12 +3,14 @@ import { NextResponse } from 'next/server';
 
 export async function GET(
   request: Request,
-  { params }: { params: { userId: string } }
+  context: { params: { userId: string } } | Promise<{ params: { userId: string } }>
 ) {
   try {
+    const { params } = await context; // await here
     const userId = params.userId;
+
     const result = await sql`
-      SELECT * FROM "Post" WHERE "userId" = ${userId} ORDER BY date DESC;
+      SELECT id, title, company, logo, location, date, "jobType", presence FROM "Post" WHERE "userId" = ${userId} ORDER BY date DESC;
     `;
 
     const posts = result.rows;

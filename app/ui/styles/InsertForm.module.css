@@ -1,29 +1,29 @@
 .container {
-  background-color: white;
+  flex: 1;
+  overflow-y: auto;           /* enable vertical scrolling */
   padding: 2rem;
+  background-color: white;
   border-radius: 0.5rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
 }
-
 .mainContent {
   flex-grow: 1;
   overflow-y: auto;
   padding: 1rem;
-
 }
 
 .heading {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   margin-bottom: 1rem;
   color: #000000;
+  font-weight: bold;
+  margin-top: 0;
 }
 
 .form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  
 }
 
 .formGroup {
@@ -34,17 +34,23 @@
 .label {
   font-weight: 500;
   margin-bottom: 0.5rem;
+  color: #374151;
 }
 
-.input {
+.input,
+.select,
+.textarea {
   width: 100%;
-  border: 2px solid #707070;
+  border: 1px solid #707070;
   padding: 0.5rem;
   border-radius: 0.375rem;
   outline: none;
+  font-size: 1rem;
 }
 
-.input:focus {
+.input:focus,
+.select:focus,
+.textarea:focus {
   border-color: #000000;
 }
 
@@ -55,6 +61,8 @@
   border-radius: 0.375rem;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  font-size: 1rem;
+  border: none;
 }
 
 .button:hover {
@@ -63,7 +71,44 @@
 
 .pageWrapper {
   width: 100%;
-  max-width: 800px; /* ✅ adjust this for narrow width */
+  max-width: 800px;
   margin: 0 auto;
-  /* padding: 2rem; */
+  height: calc(100vh - 110px);              /* take full viewport height */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;           /* prevent outer scroll */
+}
+
+.requiredLabel::after {
+  content: '*';
+  color: red;
+  margin-left: 0.25rem;
+}
+
+.dateField {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 600px) {
+  .dateField {
+    flex-direction: column;
+  }
+}
+
+.formRow {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.formRow > .formGroup {
+  flex: 1;
+  min-width: 200px;
+  margin-inline-end: 1rem;
+}
+
+.narrowInput {
+  max-width: 300px; /* or adjust to whatever you prefer */
 }

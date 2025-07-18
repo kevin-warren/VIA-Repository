@@ -1,41 +1,51 @@
-// // app/profile/edit/page.tsx
 // 'use client';
 
-// import { useEffect, useState } from 'react';
-// import { useRouter } from 'next/navigation';
+// import { useSearchParams, useRouter } from 'next/navigation';
 // import { useSession } from 'next-auth/react';
+// import { useState, useEffect } from 'react';
 // import styles from '../../ui/styles/InsertForm.module.css';
 
 // export default function EditPostPage() {
 //   const router = useRouter();
-//   const { data: session, /*status */ } = useSession();
+//   const searchParams = useSearchParams();
+//   const { data: session } = useSession();
+
 //   const [loading, setLoading] = useState(true);
 //   const [formData, setFormData] = useState({
 //     id: '',
 //     title: '',
 //     content: '',
-//     date: new Date().toISOString().slice(0, 10),
+//     date: '',
 //   });
 
 //   useEffect(() => {
-//     async function fetchPost() {
-//       if (!session?.user?.id) return;
-//       const res = await fetch(`/api/posts/${session.user.id}`);
-//       const { post } = await res.json();
-//       setFormData({
-//         id: post.id,
-//         title: post.title,
-//         content: post.content,
-//         date: post.date.slice(0, 10),
-//       });
-//       setLoading(false);
+//     const id = searchParams.get('id');
+//     if (!id) {
+//       console.error('No post id in query params');
+//       return;
 //     }
-//     fetchPost();
-//   }, [session]);
 
-//   const handleChange = (
-//     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-//   ) => {
+//     async function fetchPost() {
+//       try {
+//         const res = await fetch(`/api/posts/${id}`);
+//         if (!res.ok) throw new Error('Failed to fetch post');
+//         const { post } = await res.json();
+//         setFormData({
+//           id: post.id,
+//           title: post.title,
+//           content: post.content,
+//           date: post.date ? post.date.slice(0, 10) : '',
+//         });
+//         setLoading(false);
+//       } catch (error) {
+//         console.error(error);
+//       }
+//     }
+
+//     fetchPost();
+//   }, [searchParams]);
+
+//   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 //     const { name, value } = e.target;
 //     setFormData((prev) => ({ ...prev, [name]: value }));
 //   };
@@ -116,11 +126,24 @@ export default function EditPostPage() {
   const { data: session } = useSession();
 
   const [loading, setLoading] = useState(true);
+
   const [formData, setFormData] = useState({
     id: '',
     title: '',
-    content: '',
+    company: '',
+    logo: '',
+    category: '',
     date: '',
+    location: '',
+    pay: '',
+    presence: '',
+    jobType: '',
+    jobDescription: '',
+    startDate: '',
+    endDate: '',
+    summary: '',
+    duties: '',
+    qualifications: '',
   });
 
   useEffect(() => {
@@ -135,12 +158,26 @@ export default function EditPostPage() {
         const res = await fetch(`/api/posts/${id}`);
         if (!res.ok) throw new Error('Failed to fetch post');
         const { post } = await res.json();
+
         setFormData({
           id: post.id,
-          title: post.title,
-          content: post.content,
+          title: post.title || '',
+          company: post.company || '',
+          logo: post.logo || '',
+          category: post.category || '',
           date: post.date ? post.date.slice(0, 10) : '',
+          location: post.location || '',
+          pay: post.pay || '',
+          presence: post.presence || '',
+          jobType: post.jobType || '',
+          jobDescription: post.jobDescription || '',
+          startDate: post.startDate ? post.startDate.slice(0, 10) : '',
+          endDate: post.endDate ? post.endDate.slice(0, 10) : '',
+          summary: post.summary || '',
+          duties: post.duties || '',
+          qualifications: post.qualifications || '',
         });
+
         setLoading(false);
       } catch (error) {
         console.error(error);
@@ -150,22 +187,27 @@ export default function EditPostPage() {
     fetchPost();
   }, [searchParams]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     await fetch('/api/posts', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         ...formData,
+        // hours: formData.hours ? Number(formData.hours) : null,
         author: session?.user?.name,
         userId: session?.user?.id,
       }),
     });
+
     router.push('/?tab=posts');
   };
 
@@ -174,39 +216,202 @@ export default function EditPostPage() {
   return (
     <main className={styles.pageWrapper}>
       <div className={styles.container}>
-        <h2 className={styles.heading}>Edit Post</h2>
+        <h2 className={styles.heading}>New Job Post</h2>
         <form onSubmit={handleSubmit} className={styles.form}>
+  
+        <div className={styles.formRow}>
           <div className={styles.formGroup}>
-            <label htmlFor="title" className={styles.label}>Title:</label>
+            <label className={styles.label}>Job Title*</label>
             <input
-              type="text"
-              id="title"
               name="title"
               value={formData.title}
               onChange={handleChange}
               className={styles.input}
+              required
             />
           </div>
+
           <div className={styles.formGroup}>
-            <label htmlFor="content" className={styles.label}>Content:</label>
-            <textarea
-              id="content"
-              name="content"
-              rows={4}
-              value={formData.content}
+            <label className={styles.label}>Company Name*</label>
+            <input
+              name="company"
+              value={formData.company}
+              onChange={handleChange}
+              className={styles.input}
+              required
+            />
+          </div>
+        </div>
+
+        <div className={styles.formGroup}>
+            <label className={styles.label}>Company Logo</label>
+            <input
+              name="logo"
+              value={formData.logo}
+              onChange={handleChange}
+              className={`${styles.input} ${styles.narrowInput}`}
+            />
+          </div>
+
+        <div className={styles.formGroup}>
+            <label className={styles.label}>Date Posted*</label>
+            <input
+              type="date"
+              name="date"
+              value={formData.date}
+              onChange={handleChange}
+              className={`${styles.input} ${styles.narrowInput}`}
+              required
+            />
+          </div>
+
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Job Location*</label>
+            <input
+              name="location"
+              value={formData.location}
+              onChange={handleChange}
+              className={`${styles.input} ${styles.narrowInput}`}
+              required
+            />
+          </div>
+
+        <div className={styles.formRow}>
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Job Category*</label>
+            <select
+              name="category"
+              value={formData.category}
+              onChange={handleChange}
+              className={styles.input}
+              required
+            >
+              <option value="">Select</option>
+              <option>Technology</option>
+              <option>Healthcare</option>
+              <option>Finance</option>
+              <option>Education</option>
+              <option>Marketing</option>
+              <option>Retail</option>
+              <option>Engineering</option>
+              <option>Legal</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Job Type*</label>
+            <select
+              name="jobType"
+              value={formData.jobType}
+              onChange={handleChange}
+              className={styles.input}
+              required
+            >
+              <option value="">Select</option>
+              <option>Full-time</option>
+              <option>Part-time</option>
+              <option>Internship</option>
+            </select>
+          </div>
+
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Work Environment*</label>
+            <select
+              name="presence"
+              value={formData.presence}
+              onChange={handleChange}
+              className={styles.input}
+              required
+            >
+              <option value="">Select</option>
+              <option>Remote</option>
+              <option>Hybrid</option>
+              <option>On-site</option>
+            </select>
+          </div>
+        </div>
+  
+          
+  
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Pay Rate/Range</label>
+            <input
+              name="pay"
+              value={formData.pay}
+              onChange={handleChange}
+              className={`${styles.input} ${styles.narrowInput}`}
+            />
+          </div>
+  
+          
+        <div className={styles.formRow}>
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Start Date</label>
+            <input
+              type="date"
+              name="startDate"
+              value={formData.startDate}
               onChange={handleChange}
               className={styles.input}
             />
           </div>
+  
           <div className={styles.formGroup}>
-            <label htmlFor="date" className={styles.label}>Date:</label>
+            <label className={styles.label}>End Date</label>
             <input
-              type="text"
-              id="date"
-              name="date"
-              value={formData.date}
-              readOnly
+              type="date"
+              name="endDate"
+              value={formData.endDate}
+              onChange={handleChange}
               className={styles.input}
+            />
+          </div>
+        </div>
+  
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Company Summary</label>
+            <textarea
+              name="summary"
+              value={formData.summary}
+              onChange={handleChange}
+              rows={4}
+              className={styles.input}
+            />
+          </div>
+
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Job Description</label>
+            <textarea
+              name="jobDescription"
+              value={formData.jobDescription}
+              onChange={handleChange}
+              rows={4}
+              className={styles.input}
+            />
+          </div>
+  
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Job Duties and Responsibilities*</label>
+            <textarea
+              name="duties"
+              value={formData.duties}
+              onChange={handleChange}
+              rows={4}
+              className={styles.input}
+              required
+            />
+          </div>
+  
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Qualifications*</label>
+            <textarea
+              name="qualifications"
+              value={formData.qualifications}
+              onChange={handleChange}
+              rows={4}
+              className={styles.input}
+              required
             />
           </div>
           <div>

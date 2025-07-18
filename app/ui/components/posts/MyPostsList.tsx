@@ -8,8 +8,12 @@ import styles from '../../styles/Post.module.css';
 type Post = {
   id: string;
   title: string;
-  content: string;
+  company: string;
+  logo: string;
+  location: string;
   date: string;
+  jobType: string;
+  presence: string;
 };
 
 export default function MyPostsList() {
@@ -50,8 +54,12 @@ export default function MyPostsList() {
           key={post.id}
           id={post.id}
           title={post.title}
-          content={post.content}
-          date={post.date}
+          company={post.company}
+          logo={post.logo}
+          location={post.location}
+          date={post.date.slice(0, 10)}
+          jobType={post.jobType}
+          presence={post.presence}
         />
       ))}
     </div>

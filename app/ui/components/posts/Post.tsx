@@ -1,32 +1,37 @@
-// import Link from 'next/link';
 import styles from '../../styles/Post.module.css';
 
 export default function Component({
-  // id,
   title,
-  content,
+  company,
+  logo,
+  location,
+  jobType,
+  presence,
   date,
 }: {
-  // id: string;
   title: string;
-  content: string;
+  company: string;
+  logo: string;
+  location: string;
+  jobType: string;
+  presence: string;
   date: Date | string;
 }) {
   return (
-    <div className={styles.wrapper}>  
+    <div className={styles.wrapper}>
       <div className={styles.jobPosting}>
-        <div className={styles.container}>
-          <div className={styles.jobTitle}>
-            <h2>{title}</h2>
-          </div>
-          <button className={styles.tab}>Apply</button>
+        <div className={styles.jobTitle}>
+          <h2>{title}</h2>
+          <img src={logo} />
         </div>
-        <p className={styles.jobDate}>
+        <p className={styles.jobDescription}>{company}</p>
+        <p className={styles.jobDescription}>{jobType}, {presence}</p>
+        <p className={styles.jobDate} >
+          {location} • Posted on:{' '}
           {date instanceof Date ? date.toISOString().split('T')[0] : date}
         </p>
-        <p className={styles.jobDescription}>{content}</p>
       </div>
     </div>
-
   );
 }
+

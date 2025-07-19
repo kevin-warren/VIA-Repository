@@ -39,6 +39,7 @@
     "@types/bcryptjs": "^2.4.6",
     "@types/estree": "^1.0.8",
     "@types/json-schema": "^7.0.15",
+    "@types/multer": "^2.0.0",
     "@types/node": "^20.19.1",
     "@types/pg": "^8.15.4",
     "@types/react": "^19",

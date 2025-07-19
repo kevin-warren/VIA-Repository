@@ -138,6 +138,32 @@
   background-color: #f3f4f6;
 }
 
-.jobPosting h2 {
-  width: 85%;
+.jobPosting h1 {
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 0rem;
+}
+
+.logoPreview {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 4px; /* optional: slightly rounded corners */
+  border: 1px solid #ccc; /* optional: subtle border */
+  /* margin-bottom: 1rem; */
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.companyName {
+  margin: 0rem;
+}
+
+.jobDate {
+  color: #6b7280;
+  margin-bottom: 0;
 }

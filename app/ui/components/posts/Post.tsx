@@ -3,7 +3,7 @@ import styles from '../../styles/Post.module.css';
 export default function Component({
   title,
   company,
-  // logo,
+  logo,
   location,
   jobType,
   presence,
@@ -11,7 +11,7 @@ export default function Component({
 }: {
   title: string;
   company: string;
-  // logo: string;
+  logo: string;
   location: string;
   jobType: string;
   presence: string;
@@ -20,16 +20,24 @@ export default function Component({
   return (
     <div className={styles.wrapper}>
       <div className={styles.jobPosting}>
-        <div className={styles.jobTitle}>
-          <h2>{title}</h2>
-          {/* <img src={logo} /> */}
+        <div className={styles.logoAndContent}>
+          {logo && (
+            <img src={logo} alt="Logo preview" className={styles.logoPreview} />
+          )}
+          <div className={styles.jobTextContent}>
+            <div className={styles.jobTitle}>
+              <h2>{title}</h2>
+            </div>
+            <p className={styles.jobDescription}>{company}</p>
+            <p className={styles.jobDescription}>
+              {jobType}, {presence}
+            </p>
+            <p className={styles.jobDate}>
+              {location} • Posted on:{' '}
+              {date instanceof Date ? date.toISOString().split('T')[0] : date}
+            </p>
+          </div>
         </div>
-        <p className={styles.jobDescription}>{company}</p>
-        <p className={styles.jobDescription}>{jobType}, {presence}</p>
-        <p className={styles.jobDate} >
-          {location} • Posted on:{' '}
-          {date instanceof Date ? date.toISOString().split('T')[0] : date}
-        </p>
       </div>
     </div>
   );

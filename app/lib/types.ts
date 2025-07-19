@@ -5,6 +5,7 @@ export type Post = {
     logo: string;
     category: string;
     date: string;
+    applyBy?: string | null;
     location: string;
     pay?: string | null;
     presence: string;

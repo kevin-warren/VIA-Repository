@@ -93,11 +93,11 @@ model Post {
   summary        String?
   duties         String
   qualifications String
-
-  author    String
-  userId    String
-  createdAt DateTime @default(now())
-  user      User     @relation(fields: [userId], references: [id])
+  applyBy        DateTime?
+  author         String
+  userId         String
+  createdAt      DateTime  @default(now())
+  user           User      @relation(fields: [userId], references: [id])
 }
 
 model Profile {

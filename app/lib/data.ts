@@ -75,6 +75,7 @@ export async function getPosts(): Promise<Post[]> {
       date: new Date(post.date).toISOString().split('T')[0], // => "YYYY-MM-DD"
       startDate: post.startDate ? new Date(post.startDate).toISOString().split('T')[0] : null,
       endDate: post.endDate ? new Date(post.endDate).toISOString().split('T')[0] : null,
+      applyBy: post.applyBy ? new Date(post.applyBy).toISOString().split('T')[0] : null,
     }));
   } catch (error) {
     console.error('Error getting posts', error);

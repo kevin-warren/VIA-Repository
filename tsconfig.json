@@ -26,6 +26,7 @@
         "name": "next"
       }
     ],
+    "allowSyntheticDefaultImports": true
 
   },
   "include": [

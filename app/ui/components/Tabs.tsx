@@ -200,17 +200,54 @@ export default function Tabs({ posts, profiles }: TabProps) {
                   <button className={styles.tab}>Apply</button>
                 </div>
 
-                <h2>{selectedPost.title}</h2>
-                {/* <img src={selectedPost.logo} /> */}
-                <p><strong>Company:</strong> {selectedPost.company}</p>
-                <p><strong>Category:</strong> {selectedPost.category}</p>
-                <p><strong>Date Posted:</strong> {selectedPost.date}</p>
-                <p><strong>Location:</strong> {selectedPost.location}</p>
+                <div className={styles.logoContainer}>
+                  <img src={selectedPost.logo} alt="Logo preview" className={styles.logoPreview} />
+                  <h2 className={styles.companyName}>{selectedPost.company}</h2>
+                </div>
+
+                <h1>{selectedPost.title}</h1>
+
+
+                <p className={styles.jobDate}>
+                  Posted on: {selectedPost.date}
+                  {selectedPost.applyBy && (
+                    <>
+                      {' • '}Apply by: {new Date(selectedPost.applyBy).toISOString().split('T')[0]}
+                    </>
+                  )}
+                </p>
+
+                <hr />
+
+                <p> 
+                  <strong>
+                    {selectedPost.location} {' '} • {' '}
+                    {selectedPost.jobType} {'('}
+                    {selectedPost.presence}{')'}
+                  </strong>
+                </p>
+
+
                 {selectedPost.pay && <p><strong>Pay Rate:</strong> {selectedPost.pay}</p>}
-                {selectedPost.presence && <p><strong>Work Environment:</strong> {selectedPost.presence}</p>}
-                {selectedPost.jobType && <p><strong>Job Type:</strong> {selectedPost.jobType}</p>}
-                {selectedPost.startDate && <p><strong>Start Date:</strong> {selectedPost.startDate}</p>}
-                {selectedPost.endDate && <p><strong>End Date:</strong> {selectedPost.endDate}</p>}
+                {/* {selectedPost.startDate && <p><strong>Start Date:</strong> {selectedPost.startDate}</p>}
+                {selectedPost.endDate && <p><strong>End Date:</strong> {selectedPost.endDate}</p>} */}
+
+                <p>
+                  {selectedPost.startDate && (
+                    <>
+                      <strong>Start Date:</strong>{' '}
+                      {new Date(selectedPost.startDate).toISOString().split('T')[0]}
+                    </>
+                  )}
+                  {selectedPost.startDate && selectedPost.endDate && ' • '}
+                  {selectedPost.endDate && (
+                    <>
+                      <strong>End Date:</strong>{' '}
+                      {new Date(selectedPost.endDate).toISOString().split('T')[0]}
+                    </>
+                  )}
+                </p>
+
 
                 {/* Multiline text rendering */}
                 {selectedPost.summary && (
@@ -227,7 +264,7 @@ export default function Tabs({ posts, profiles }: TabProps) {
                 )}
                 {selectedPost.duties && (
                   <div className={styles.postSection}>
-                    <strong>Job Duties:</strong>
+                    <strong>Job Duties and Responsibilities:</strong>
                     <div dangerouslySetInnerHTML={{ __html: selectedPost.duties.replace(/\n/g, '<br />') }} />
                   </div>
                 )}

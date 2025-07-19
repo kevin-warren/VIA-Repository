@@ -16,6 +16,7 @@ export default function CreatePostPage() {
     logo: '',
     category: '',
     date: new Date().toISOString().slice(0, 10),
+    applyBy: '',
     location: '',
     pay: '',
     presence: '',
@@ -32,6 +33,28 @@ export default function CreatePostPage() {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
+
+  const handleLogoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+  
+    const formDataUpload = new FormData();
+    formDataUpload.append('file', file);
+    formDataUpload.append('upload_preset', 'My_upload_preset'); // replace with your Cloudinary preset
+  
+    try {
+      const res = await fetch('https://api.cloudinary.com/v1_1/dcqnwr46v/image/upload', {
+        method: 'POST',
+        body: formDataUpload,
+      });
+  
+      const data = await res.json();
+      setFormData(prev => ({ ...prev, logo: data.secure_url }));
+    } catch (err) {
+      console.error('Failed to upload logo to Cloudinary:', err);
+    }
+  };
+  
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -96,40 +119,59 @@ export default function CreatePostPage() {
           </div>
         </div>
 
-        <div className={styles.formGroup}>
-            <label className={styles.label}>Company Logo</label>
-            <input
-              name="logo"
-              value={formData.logo}
-              onChange={handleChange}
-              className={`${styles.input} ${styles.narrowInput}`}
-            />
-          </div>
+        <div className={styles.formRow}>
+            <div className={styles.formGroup}>
+              <label className={styles.label}>Date Posted*</label>
+              <input
+                type="date"
+                name="date"
+                value={formData.date}
+                onChange={handleChange}
+                className={`${styles.input} ${styles.narrowInput}`}
+                required
+              />
+            </div>
 
-        <div className={styles.formGroup}>
-            <label className={styles.label}>Date Posted*</label>
-            <input
-              type="date"
-              name="date"
-              value={formData.date}
-              onChange={handleChange}
-              className={`${styles.input} ${styles.narrowInput}`}
-              required
-            />
-          </div>
-
-          <div className={styles.formGroup}>
-            <label className={styles.label}>Job Location*</label>
-            <input
-              name="location"
-              value={formData.location}
-              onChange={handleChange}
-              className={`${styles.input} ${styles.narrowInput}`}
-              required
-            />
+            <div className={styles.formGroup}>
+              <label className={styles.label}>Apply By</label>
+              <input
+                type="date"
+                name="applyBy"
+                value={formData.applyBy}
+                onChange={handleChange}
+                className={`${styles.input} ${styles.narrowInput}`}
+              />
+            </div>
           </div>
 
         <div className={styles.formRow}>
+          <div className={styles.formGroup}>
+              <label className={styles.label}>Company Logo*</label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleLogoUpload}
+                className={`${styles.input} ${styles.narrowInput}`}
+                required
+              />
+              {formData.logo && (
+                <img src={formData.logo} alt="Logo preview" className={styles.logoPreview} />
+              )}
+            </div>
+
+            <div className={styles.formGroup}>
+              <label className={styles.label}>Job Location*</label>
+              <input
+                name="location"
+                value={formData.location}
+                onChange={handleChange}
+                className={`${styles.input} ${styles.narrowInput}`}
+                required
+              />
+            </div>
+          </div>
+
+          <div className={styles.formRow}>
           <div className={styles.formGroup}>
             <label className={styles.label}>Job Category*</label>
             <select

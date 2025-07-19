@@ -19,6 +19,7 @@ export async function POST(request: Request) {
       logo,
       category,
       date,
+      applyBy,
       location,
       pay,
       presence,
@@ -41,15 +42,16 @@ export async function POST(request: Request) {
     const safeStartDate = startDate === '' ? null : startDate;
     const safeEndDate = endDate === '' ? null : endDate;
     const safeSummary = summary === '' ? null : summary;
+    const safeApplyBy = applyBy === '' ? null : applyBy;
 
     await sql`
       INSERT INTO "Post" (
-        id, title, company, logo, category, date, location, pay, presence,
+        id, title, company, logo, category, date, "applyBy", location, pay, presence,
         "jobType", "jobDescription", "startDate", "endDate", summary, duties, qualifications,
         author, "userId"
       )
       VALUES (
-        ${id}, ${title}, ${company}, ${logo}, ${category}, ${date}, ${location}, ${safePay}, ${safePresence},
+        ${id}, ${title}, ${company}, ${logo}, ${category}, ${date}, ${safeApplyBy}, ${location}, ${safePay}, ${safePresence},
         ${safeJobType}, ${safeJobDescription}, ${safeStartDate}, ${safeEndDate}, ${safeSummary}, ${duties}, ${qualifications},
         ${author}, ${userId}
       );
@@ -71,6 +73,7 @@ export async function PUT(request: Request) {
       logo,
       category,
       date,
+      applyBy,
       location,
       pay,
       presence,
@@ -96,6 +99,7 @@ export async function PUT(request: Request) {
     const safeQualifications = qualifications === '' ? null : qualifications;
     const safeCategory = category === '' ? null : category;
     const safeDate = date === '' ? new Date().toISOString() : date;
+    const safeApplyBy = applyBy === '' ? new Date().toISOString() : applyBy;
 
     await sql`
       UPDATE "Post"
@@ -105,6 +109,7 @@ export async function PUT(request: Request) {
         logo = ${logo},
         category = ${safeCategory},
         date = ${safeDate},
+        "applyBy" = ${safeApplyBy},
         location = ${location},
         pay = ${safePay},
         presence = ${safePresence},

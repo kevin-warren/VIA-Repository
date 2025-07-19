@@ -142,6 +142,7 @@ import Post from './posts/Post';
 import Profile from './profiles/ProfileList';
 import styles from '../styles/Tabs.module.css';
 import type { Post as PostType, Profile as ProfileType } from '../../lib/types';
+import Image from 'next/image';
 
 interface TabProps {
   posts: PostType[];
@@ -201,7 +202,7 @@ export default function Tabs({ posts, profiles }: TabProps) {
                 </div>
 
                 <div className={styles.logoContainer}>
-                  <img src={selectedPost.logo} alt="Logo preview" className={styles.logoPreview} />
+                  <Image src={selectedPost.logo} alt="Logo preview" className={styles.logoPreview} />
                   <h2 className={styles.companyName}>{selectedPost.company}</h2>
                 </div>
 

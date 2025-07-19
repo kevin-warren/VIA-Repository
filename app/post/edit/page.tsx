@@ -119,6 +119,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { useState, useEffect } from 'react';
 import styles from '../../ui/styles/InsertForm.module.css';
+import Image from 'next/image';
 
 export default function EditPostPage() {
   const router = useRouter();
@@ -302,7 +303,7 @@ export default function EditPostPage() {
                 // required
               />
               {formData.logo && (
-                <img src={formData.logo} alt="Logo preview" className={styles.logoPreview} />
+                <Image src={formData.logo} alt="Logo preview" className={styles.logoPreview} />
               )}
             </div>
 

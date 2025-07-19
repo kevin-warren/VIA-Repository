@@ -1,8 +1,9 @@
-const nextConnect = require('next-connect');
+import * as nextConnectModule from 'next-connect';
 import multer from 'multer';
 import cloudinary from '../lib/cloudinary';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
+const nextConnect = (nextConnectModule as any).default || nextConnectModule;
 const upload = multer({ storage: multer.memoryStorage() });
 
 const apiRoute = nextConnect({

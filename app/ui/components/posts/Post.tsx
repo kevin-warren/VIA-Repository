@@ -1,4 +1,5 @@
 import styles from '../../styles/Post.module.css';
+import Image from 'next/image';
 
 export default function Component({
   title,
@@ -22,7 +23,7 @@ export default function Component({
       <div className={styles.jobPosting}>
         <div className={styles.logoAndContent}>
           {logo && (
-            <img src={logo} alt="Logo preview" className={styles.logoPreview} />
+            <Image src={logo} alt="Logo preview" className={styles.logoPreview} />
           )}
           <div className={styles.jobTextContent}>
             <div className={styles.jobTitle}>

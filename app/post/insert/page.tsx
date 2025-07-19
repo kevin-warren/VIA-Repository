@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { v4 as uuidv4 } from 'uuid';
 import styles from '../../ui/styles/InsertForm.module.css';
+import Image from 'next/image';
 
 export default function CreatePostPage() {
   const router = useRouter();
@@ -155,7 +156,7 @@ export default function CreatePostPage() {
                 required
               />
               {formData.logo && (
-                <img src={formData.logo} alt="Logo preview" className={styles.logoPreview} />
+                <Image src={formData.logo} alt="Logo preview" className={styles.logoPreview} />
               )}
             </div>
 

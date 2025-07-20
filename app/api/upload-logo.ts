@@ -1,46 +1,9 @@
-
-const nextConnect = require('next-connect');
 import multer from 'multer';
 import cloudinary from '../lib/cloudinary';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-const upload = multer({ storage: multer.memoryStorage() });
-
-const apiRoute = nextConnect({
-  onError(error: Error, req: NextApiRequest, res: NextApiResponse) {
-    res.status(501).json({ error: `Something went wrong: ${error.message}` });
-  },
-  onNoMatch(req: NextApiRequest, res: NextApiResponse) {
-    res.status(405).json({ error: `Method ${req.method} Not Allowed` });
-  },
-});
-
-apiRoute.use(upload.single('file'));
-
-apiRoute.post(async (req: NextApiRequest, res: NextApiResponse) => {
-  const fileBuffer = (req as any).file?.buffer;
-
-  const result = await new Promise((resolve, reject) => {
-    cloudinary.uploader.upload_stream({ resource_type: 'image' }, (error, result) => {
-      if (error) return reject(error);
-      resolve(result);
-    }).end(fileBuffer);
-  });
-
-  res.status(200).json(result);
-});
-
-export default apiRoute;
-
-
-/*
-
-import nextConnect from 'next-connect'; // may show TS error, so disable below
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const nc = nextConnect as any;
-import multer from 'multer';
-import cloudinary from '../lib/cloudinary';
-import type { NextApiRequest, NextApiResponse } from 'next';
+// Dynamically require next-connect and cast as any to avoid TS errors
+const nextConnect = require('next-connect') as any;
 
 interface NextApiRequestWithFile extends NextApiRequest {
   file?: { buffer: Buffer };
@@ -48,11 +11,11 @@ interface NextApiRequestWithFile extends NextApiRequest {
 
 const upload = multer({ storage: multer.memoryStorage() });
 
-const handler = nc<NextApiRequest, NextApiResponse>({
-  onError(error, req, res) {
+const handler = nextConnect({
+  onError(error: Error, req: NextApiRequest, res: NextApiResponse) {
     res.status(501).json({ error: `Something went wrong: ${error.message}` });
   },
-  onNoMatch(req, res) {
+  onNoMatch(req: NextApiRequest, res: NextApiResponse) {
     res.status(405).json({ error: `Method ${req.method} Not Allowed` });
   },
 });
@@ -89,4 +52,3 @@ export const config = {
 };
 
 export default handler;
-*/

@@ -1,9 +1,8 @@
+// @ts-expect-error: next-connect has no default export in some setups, but this works at runtime
+import nextConnect from 'next-connect';
 import multer from 'multer';
 import cloudinary from '../lib/cloudinary';
 import type { NextApiRequest, NextApiResponse } from 'next';
-
-// Dynamically require next-connect and cast as any to avoid TS errors
-const nextConnect = require('next-connect') as any;
 
 interface NextApiRequestWithFile extends NextApiRequest {
   file?: { buffer: Buffer };

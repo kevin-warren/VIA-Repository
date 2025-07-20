@@ -23,7 +23,7 @@ export default function Component({
       <div className={styles.jobPosting}>
         <div className={styles.logoAndContent}>
           {logo && (
-            <Image src={logo} alt="Logo preview" className={styles.logoPreview} />
+            <Image src={logo} alt="Logo preview" width={50} height={50} className={styles.logoPreview} />
           )}
           <div className={styles.jobTextContent}>
             <div className={styles.jobTitle}>

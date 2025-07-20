@@ -202,7 +202,7 @@ export default function Tabs({ posts, profiles }: TabProps) {
                 </div>
 
                 <div className={styles.logoContainer}>
-                  <Image src={selectedPost.logo} alt="Logo preview" className={styles.logoPreview} />
+                  <Image src={selectedPost.logo} alt="Logo preview" width={40} height={40} className={styles.logoPreview} />
                   <h2 className={styles.companyName}>{selectedPost.company}</h2>
                 </div>
 

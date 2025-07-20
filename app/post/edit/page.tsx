@@ -303,7 +303,7 @@ export default function EditPostPage() {
                 // required
               />
               {formData.logo && (
-                <Image src={formData.logo} alt="Logo preview" className={styles.logoPreview} />
+                <Image src={formData.logo} alt="Logo preview" width={40} height={40} className={styles.logoPreview} />
               )}
             </div>
 

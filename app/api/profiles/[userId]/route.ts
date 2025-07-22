@@ -62,7 +62,7 @@ export async function PATCH(
       author,
     } = data;
 
-    const result = await sql`
+    /*const result =*/ await sql`
       UPDATE "Profile"
       SET
         name = ${name},

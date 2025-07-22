@@ -41,7 +41,7 @@ export default function CreatePostPage() {
   
     const formDataUpload = new FormData();
     formDataUpload.append('file', file);
-    formDataUpload.append('upload_preset', 'My_upload_preset'); // replace with your Cloudinary preset
+    formDataUpload.append('upload_preset', 'logo_preset'); // replace with your Cloudinary preset
   
     try {
       const res = await fetch('https://api.cloudinary.com/v1_1/dcqnwr46v/image/upload', {
@@ -145,8 +145,8 @@ export default function CreatePostPage() {
             </div>
           </div>
 
-        <div className={styles.formRow}>
-          <div className={styles.formGroup}>
+          <div className={styles.formRow}>
+            <div className={styles.formGroup}>
               <label className={styles.label}>Company Logo*</label>
               <input
                 type="file"

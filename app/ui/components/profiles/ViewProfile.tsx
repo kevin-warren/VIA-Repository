@@ -8,10 +8,22 @@ export default function ViewProfile({
   name,
   bio,
   date,
+  resume,
+  email,
+  phone,
+  linkedin,
+  website,
+  headline,
 }: {
   name: string;
-  bio: string;
+  bio: string | null;
   date: Date | string;
+  resume: string;
+  email: string;
+  phone: string;
+  linkedin: string;
+  website: string;
+  headline: string;
 }) {
   const { data: session } = useSession();
   const router = useRouter();
@@ -20,8 +32,14 @@ export default function ViewProfile({
     // Redirect to profile/edit with query params or use global state
     const params = new URLSearchParams({
       name,
-      bio,
+      bio: bio || '',
       date: date instanceof Date ? date.toISOString().split('T')[0] : date,
+      resume,
+      email,
+      phone,
+      linkedin,
+      website,
+      headline,
     });
 
     router.push(`/profile/edit?${params.toString()}`);
@@ -50,10 +68,10 @@ export default function ViewProfile({
       <div className={styles.profileName}>
         <h2>{name}</h2>
       </div>
+      <p className={styles.profileHeadline}>{headline}</p>
       <p className={styles.profileDate}>
         {date instanceof Date ? date.toISOString().split('T')[0] : date}
       </p>
-      <p className={styles.profileBio}>{bio}</p>
     </div>
   );
 }

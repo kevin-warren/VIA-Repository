@@ -101,11 +101,17 @@ model Post {
 }
 
 model Profile {
-  id     String   @id @default(cuid())
-  userId String   @unique
-  name   String
-  bio    String
-  date   DateTime @default(now())
-  author String
-  user   User     @relation(fields: [userId], references: [id])
+  id       String   @id @default(cuid())
+  userId   String   @unique
+  name     String
+  bio      String
+  date     DateTime @default(now())
+  author   String
+  resume   String?
+  headline String
+  email    String
+  phone    String?
+  linkedin String?
+  website  String?
+  user     User     @relation(fields: [userId], references: [id])
 }

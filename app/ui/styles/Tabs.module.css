@@ -52,8 +52,14 @@
   height: calc(100vh - 180px);
 }
 
-.postDetail h2 {
-  margin-top: 0;
+.postDetail h1 {
+  margin-top: 0rem;
+  margin-bottom: 0rem;
+}
+
+.postDetail h3 {
+  margin-top: 0rem;
+  margin-bottom: 0rem;
 }
 
 .postDetailText {

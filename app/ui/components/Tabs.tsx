@@ -296,14 +296,44 @@ export default function Tabs({ posts, profiles }: TabProps) {
           <div className={styles.postDetail}>
             {selectedProfile ? (
               <>
-                <h2>{selectedProfile.name}</h2>
-                <p>{selectedProfile.date}</p>
-                <p>{selectedProfile.bio}</p>
+                <h1>{selectedProfile.name}</h1>
+                <h3>{selectedProfile.headline}</h3>
+                {(selectedProfile.resume || selectedProfile.date) && (
+                  <p className={styles.resumeAndDate}>
+                    {selectedProfile.resume && (
+                      <a href={selectedProfile.resume} target="_blank" rel="noopener noreferrer">
+                        View Resume
+                      </a>
+                    )}
+                    {selectedProfile.resume && selectedProfile.date && <span className={styles.dot}> • </span>}
+                    {selectedProfile.date && <span className={styles.jobDate}>Posted on: {selectedProfile.date}</span>}
+                  </p>
+                )}
+
+                <hr />
+
+                {selectedProfile.bio && (
+                  <>
+                    <h3>About</h3>
+                    <p>{selectedProfile.bio}</p>
+                    
+                    <hr />
+                  </>
+                )}
+
+                
+
+                <h3>Contact</h3>
+                {selectedProfile.email && <p><strong>Email:</strong> <a href={`mailto:${selectedProfile.email}`}>{selectedProfile.email}</a></p>}
+                {selectedProfile.phone && <p><strong>Phone:</strong> <a href={`tel:${selectedProfile.phone}`}>{selectedProfile.phone}</a></p>}
+                {selectedProfile.linkedin && <p><strong>LinkedIn:</strong> <a href={selectedProfile.linkedin} target="_blank" rel="noopener noreferrer">{selectedProfile.linkedin}</a></p>}
+                {selectedProfile.website && <p><strong>Website:</strong> <a href={selectedProfile.website} target="_blank" rel="noopener noreferrer">{selectedProfile.website}</a></p>}
               </>
             ) : (
               <p className={styles.postDetailText}>Select a profile to view details</p>
             )}
           </div>
+
         </div>
       )}
     </>

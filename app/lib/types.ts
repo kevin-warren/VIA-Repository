@@ -22,7 +22,13 @@ export type Post = {
   export type Profile = {
     id: string;
     name: string;
-    bio: string;
+    bio: string | null;
     date: string;
     author: string;
+    resume?: string | null;
+    email: string;
+    phone?: string | null;
+    linkedin?: string | null;
+    website?: string | null;
+    headline: string;
   };

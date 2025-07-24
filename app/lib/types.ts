@@ -32,3 +32,17 @@ export type Post = {
     website?: string | null;
     headline: string;
   };
+
+export type Application = {
+  id: string;
+  postId: string;
+  userId: string;
+  name: string;
+  email: string;
+  phone?: string;
+  linkedin?: string;
+  website?: string;
+  resume?: string;
+  bio?: string;
+  date: string;
+};

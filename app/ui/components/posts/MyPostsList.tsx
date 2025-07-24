@@ -14,6 +14,7 @@ type Post = {
   date: string;
   jobType: string;
   presence: string;
+  applicationCount?: number;
 };
 
 export default function MyPostsList() {
@@ -60,6 +61,7 @@ export default function MyPostsList() {
           date={post.date.slice(0, 10)}
           jobType={post.jobType}
           presence={post.presence}
+          applicationCount={post.applicationCount}
         />
       ))}
     </div>

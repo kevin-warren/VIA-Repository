@@ -40,7 +40,7 @@ export default function Tabs({ posts, profiles }: TabProps) {
           className={`${styles.tab} ${activeTab === 'jobs' ? styles.activeTab : ''}`}
           onClick={() => setActiveTab('jobs')}
         >
-          Job Postings
+          Project Postings
         </button>
         <button
           className={`${styles.tab} ${activeTab === 'profiles' ? styles.activeTab : ''}`}

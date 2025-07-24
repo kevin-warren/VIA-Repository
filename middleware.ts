@@ -46,7 +46,7 @@ import { getToken } from "next-auth/jwt";
 const protectedRoutes = ["/profile/insert", "/post/insert"];
 
 export default async function middleware(request: NextRequest) {
-  const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET, secureCookie: true });
+  const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET,/* secureCookie: true */});
   console.log("🔐 TOKEN:", token);
 
 

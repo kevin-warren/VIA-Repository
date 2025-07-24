@@ -11,7 +11,7 @@ interface NavLinksClientProps {
 export default function NavLinksClient({ hasProfile }: NavLinksClientProps) {
   const links = [
     {
-      name: 'Create Job Post',
+      name: 'Create Project Post',
       href: '/post/insert',
     },
     // Conditionally show profile creation link

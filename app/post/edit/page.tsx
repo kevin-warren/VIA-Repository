@@ -492,12 +492,12 @@ export default function EditPostPage() {
   return (
     <main className={styles.pageWrapper}>
       <div className={styles.container}>
-        <h2 className={styles.heading}>New Job Post</h2>
+        <h2 className={styles.heading}>Edit Project Post</h2>
         <form onSubmit={handleSubmit} className={styles.form}>
   
         <div className={styles.formRow}>
           <div className={styles.formGroup}>
-            <label className={styles.label}>Job Title*</label>
+            <label className={styles.label}>Project Name*</label>
             <input
               name="title"
               value={formData.title}
@@ -507,8 +507,9 @@ export default function EditPostPage() {
             />
           </div>
 
+
           <div className={styles.formGroup}>
-            <label className={styles.label}>Company Name*</label>
+            <label className={styles.label}>Company/Organization Name*</label>
             <input
               name="company"
               value={formData.company}
@@ -546,7 +547,7 @@ export default function EditPostPage() {
 
         <div className={styles.formRow}>
           <div className={styles.formGroup}>
-              <label className={styles.label}>Company Logo*</label>
+              <label className={styles.label}>Company/Organization Logo</label>
               <input
                 type="file"
                 accept="image/*"
@@ -560,7 +561,7 @@ export default function EditPostPage() {
             </div>
 
             <div className={styles.formGroup}>
-              <label className={styles.label}>Job Location*</label>
+              <label className={styles.label}>Project Location*</label>
               <input
                 name="location"
                 value={formData.location}
@@ -574,7 +575,7 @@ export default function EditPostPage() {
 
           <div className={styles.formRow}>
           <div className={styles.formGroup}>
-            <label className={styles.label}>Job Category*</label>
+            <label className={styles.label}>Project Category*</label>
             <select
               name="category"
               value={formData.category}
@@ -596,7 +597,7 @@ export default function EditPostPage() {
           </div>
 
           <div className={styles.formGroup}>
-            <label className={styles.label}>Job Type*</label>
+            <label className={styles.label}>Project Type*</label>
             <select
               name="jobType"
               value={formData.jobType}
@@ -630,15 +631,19 @@ export default function EditPostPage() {
   
           
   
-          <div className={styles.formGroup}>
-            <label className={styles.label}>Pay Rate/Range</label>
-            <input
-              name="pay"
-              value={formData.pay}
-              onChange={handleChange}
-              className={`${styles.input} ${styles.narrowInput}`}
-            />
-          </div>
+        <div className={styles.formGroup}>
+          <label className={styles.label}>Paid or Not Paid</label>
+          <select
+            name="pay"
+            value={formData.pay}
+            onChange={handleChange}
+            className={`${styles.input} ${styles.narrowInput}`}
+          >
+            <option value="">Select an option</option>
+            <option value="Paid">Paid</option>
+            <option value="Not Paid">Not Paid</option>
+          </select>
+        </div>
   
           
         <div className={styles.formRow}>
@@ -666,7 +671,7 @@ export default function EditPostPage() {
         </div>
   
           <div className={styles.formGroup}>
-            <label className={styles.label}>Company Summary</label>
+            <label className={styles.label}>Company/Organization Summary</label>
             <textarea
               name="summary"
               value={formData.summary}
@@ -677,7 +682,7 @@ export default function EditPostPage() {
           </div>
 
           <div className={styles.formGroup}>
-            <label className={styles.label}>Job Description</label>
+            <label className={styles.label}>Project Description</label>
             <textarea
               name="jobDescription"
               value={formData.jobDescription}
@@ -688,7 +693,7 @@ export default function EditPostPage() {
           </div>
   
           <div className={styles.formGroup}>
-            <label className={styles.label}>Job Duties and Responsibilities*</label>
+            <label className={styles.label}>Project Duties and Responsibilities*</label>
             <textarea
               name="duties"
               value={formData.duties}
@@ -700,7 +705,7 @@ export default function EditPostPage() {
           </div>
   
           <div className={styles.formGroup}>
-            <label className={styles.label}>Qualifications*</label>
+            <label className={styles.label}>Project Qualifications*</label>
             <textarea
               name="qualifications"
               value={formData.qualifications}

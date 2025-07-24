@@ -92,7 +92,7 @@ export default function ApplyPage() {
     });
 
     if (res.ok) {
-      router.push('/?tab=profiles');
+      router.push('/?tab=posts');
       router.refresh();
     } else {
       alert('Error submitting application');
@@ -147,6 +147,16 @@ export default function ApplyPage() {
           </div>
 
           <div className={styles.formGroup}>
+            <label className={styles.label}>Resume (PDF)</label>
+            <input
+              type="file"
+              accept="application/pdf"
+              onChange={(e) => setResumeFile(e.target.files?.[0] || null)}
+              className={`${styles.input} ${styles.narrowInput}`}
+            />
+          </div>
+
+          <div className={styles.formGroup}>
             <label className={styles.label}>Phone</label>
             <input
               type="tel"
@@ -179,17 +189,7 @@ export default function ApplyPage() {
             />
           </div>
 
-          <div className={styles.formGroup}>
-            <label className={styles.label}>Resume (PDF)</label>
-            <input
-              type="file"
-              accept="application/pdf"
-              onChange={(e) => setResumeFile(e.target.files?.[0] || null)}
-              className={`${styles.input} ${styles.narrowInput}`}
-            />
-          </div>
-
-          <div className={styles.formGroup}>
+          {/* <div className={styles.formGroup}>
             <label className={styles.label}>Bio</label>
             <textarea
               name="bio"
@@ -198,7 +198,7 @@ export default function ApplyPage() {
               rows={4}
               className={styles.input}
             />
-          </div>
+          </div> */}
 
           <div className={styles.formGroup}>
             <label className={styles.label}>Date</label>
@@ -211,9 +211,11 @@ export default function ApplyPage() {
             />
           </div>
 
-          <button type="submit" className={styles.button} disabled={submitting}>
-            {submitting ? 'Submitting...' : 'Submit Application'}
-          </button>
+          <div>
+            <button type="submit" className={styles.button} disabled={submitting}>
+              {submitting ? 'Submitting...' : 'Submit Application'}
+            </button>
+          </div>
         </form>
       </div>
     </main>

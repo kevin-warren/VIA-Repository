@@ -170,15 +170,18 @@ export default function Tabs({ posts, profiles }: TabProps) {
                 <h1>{selectedProfile.name}</h1>
                 <h3>{selectedProfile.headline}</h3>
                 {(selectedProfile.resume || selectedProfile.date) && (
-                  <p className={styles.resumeAndDate}>
+                  <p className={styles.resumeAndDate} style={{ marginBottom: '0rem' }}>
                     {selectedProfile.resume && (
                       <a href={selectedProfile.resume} target="_blank" rel="noopener noreferrer">
-                        View Resume
+                        <strong>View Resume</strong>
                       </a>
                     )}
                     {selectedProfile.resume && selectedProfile.date && <span className={styles.dot}> • </span>}
                     {selectedProfile.date && <span className={styles.jobDate}>Posted on: {selectedProfile.date}</span>}
                   </p>
+                )}
+                {selectedProfile.searchingFor && (
+                  <p style={{ marginTop: '0rem' }}><strong>Searching for:</strong> {selectedProfile.searchingFor}</p>
                 )}
 
                 <hr />

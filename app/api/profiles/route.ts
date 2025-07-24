@@ -28,11 +28,11 @@ export async function POST(request: Request) {
 export async function PUT(request: Request) {
   try {
     const body = await request.json();
-    const { name, bio, date, author, userId, resume, email, phone, linkedin, website, headline } = body;
+    const { name, bio, date, author, userId, resume, email, phone, linkedin, website, headline, searchingFor } = body;
 
     await sql`
       UPDATE "Profile"
-      SET name = ${name}, bio = ${bio}, date = ${date}, author = ${author}, resume = ${resume}, email = ${email}, phone = ${phone}, linkedin = ${linkedin}, website = ${website}, headline = ${headline}
+      SET name = ${name}, bio = ${bio}, date = ${date}, author = ${author}, resume = ${resume}, email = ${email}, phone = ${phone}, linkedin = ${linkedin}, website = ${website}, headline = ${headline}, "searchingFor" = ${searchingFor}
       WHERE "userId" = ${userId};
     `;
 

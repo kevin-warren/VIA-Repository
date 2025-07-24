@@ -20,6 +20,7 @@ export default function CreateProfilePage() {
     linkedin: '',
     website: '',
     headline: '',
+    searchingFor: '',
   });
 
   const [resumeFile, setResumeFile] = useState<File | null>(null);
@@ -98,10 +99,11 @@ export default function CreateProfilePage() {
           linkedin: formData.linkedin,
           website: formData.website,
           headline: formData.headline,
+          searchingFor: formData.searchingFor,
         }),
       });
 
-      setFormData({ id: '', name: '', bio: '', date: '', email: '', phone: '', linkedin: '', website: '', headline: '' });
+      setFormData({ id: '', name: '', bio: '', date: '', email: '', phone: '', linkedin: '', website: '', headline: '', searchingFor: '' });
       setResumeFile(null);
       router.push('/?tab=profiles');
       router.refresh();
@@ -188,6 +190,22 @@ export default function CreateProfilePage() {
               className={`${styles.input} ${styles.narrowInput}`}
             />
           </div>
+
+          <div className={styles.formGroup}>
+            <label htmlFor="searchingFor" className={styles.label}>
+              Searching For
+            </label>
+            <input
+              type="text"
+              id="searchingFor"
+              name="searchingFor"
+              value={formData.searchingFor}
+              onChange={handleChange}
+              className={styles.input}
+              placeholder="e.g. Full-time Marketing jobs starting in Spring 2026"
+            />
+          </div>
+
           <div className={styles.formGroup}>
             <label htmlFor="bio" className={styles.label}>
               Bio:
@@ -199,6 +217,7 @@ export default function CreateProfilePage() {
               value={formData.bio}
               onChange={handleChange}
               className={styles.input}
+              placeholder="Tell us about yourself and/or your career interests"
             />
           </div>
 

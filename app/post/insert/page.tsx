@@ -167,6 +167,7 @@ export default function CreatePostPage() {
                 value={formData.location}
                 onChange={handleChange}
                 className={`${styles.input} ${styles.narrowInput}`}
+                placeholder="e.g. Richmond, VA"
                 required
               />
             </div>

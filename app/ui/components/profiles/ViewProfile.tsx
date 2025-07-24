@@ -14,6 +14,7 @@ export default function ViewProfile({
   linkedin,
   website,
   headline,
+  searchingFor,
 }: {
   name: string;
   bio: string | null;
@@ -24,6 +25,7 @@ export default function ViewProfile({
   linkedin: string;
   website: string;
   headline: string;
+  searchingFor: string;
 }) {
   const { data: session } = useSession();
   const router = useRouter();
@@ -40,6 +42,7 @@ export default function ViewProfile({
       linkedin,
       website,
       headline,
+      searchingFor,
     });
 
     router.push(`/profile/edit?${params.toString()}`);

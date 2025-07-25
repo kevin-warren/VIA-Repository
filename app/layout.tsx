@@ -20,6 +20,9 @@ export const dynamic = "force-dynamic";
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      <head>
+        <meta name="viewport" content="width=1024" />
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <ClientSessionProvider>
           <div className={styles.wrapper}>
@@ -38,3 +41,4 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   );
 }
+

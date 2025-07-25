@@ -43,3 +43,17 @@ a {
 /* * {
   outline: 1px solid red;
 }  */
+
+body {
+  min-width: 1024px;
+  overflow-x: auto;
+}
+
+/* Optional: shrink view slightly on small screens to avoid scroll */
+@media (max-width: 1024px) {
+  html {
+    transform: scale(0.9); /* You can tweak this to fit better */
+    transform-origin: top left;
+    width: 100%;
+  }
+}

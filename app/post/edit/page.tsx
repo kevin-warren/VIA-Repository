@@ -449,26 +449,70 @@ export default function EditPostPage() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleLogoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+  // const handleLogoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = e.target.files?.[0];
+  //   if (!file) return;
   
-    const formDataUpload = new FormData();
-    formDataUpload.append('file', file);
-    formDataUpload.append('upload_preset', 'My_upload_preset'); // replace with your Cloudinary preset
+  //   const formDataUpload = new FormData();
+  //   formDataUpload.append('file', file);
+  //   formDataUpload.append('upload_preset', 'My_upload_preset'); // replace with your Cloudinary preset
+  
+  //   try {
+  //     const res = await fetch('https://api.cloudinary.com/v1_1/dcqnwr46v/image/upload', {
+  //       method: 'POST',
+  //       body: formDataUpload,
+  //     });
+  
+  //     const data = await res.json();
+  //     setFormData(prev => ({ ...prev, logo: data.secure_url }));
+  //   } catch (err) {
+  //     console.error('Failed to upload logo to Cloudinary:', err);
+  //   }
+  // };
+
+  async function handleLogoUpload(file: File): Promise<string | null> {
+    const formData = new FormData();
+    formData.append("file", file);
   
     try {
-      const res = await fetch('https://api.cloudinary.com/v1_1/dcqnwr46v/image/upload', {
-        method: 'POST',
-        body: formDataUpload,
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
       });
   
+      if (!res.ok) {
+        console.error("Upload failed:", await res.text());
+        return null;
+      }
+  
       const data = await res.json();
-      setFormData(prev => ({ ...prev, logo: data.secure_url }));
+      return data.url; // <-- actual Vercel Blob URL
     } catch (err) {
-      console.error('Failed to upload logo to Cloudinary:', err);
+      console.error("Upload error:", err);
+      return null;
     }
-  };
+  }
+  
+// Change event handler (takes event, extracts file, calls upload)
+async function onFileChange(event: React.ChangeEvent<HTMLInputElement>) {
+  const file = event.target.files?.[0];
+  if (!file) return;
+
+  const uploadedUrl = await handleLogoUpload(file);
+  if (uploadedUrl) {
+    console.log("Uploaded logo URL:", uploadedUrl);
+
+    // ✅ Update the form state with the uploaded logo URL
+    setFormData(prev => ({
+      ...prev,
+      logo: uploadedUrl,
+    }));
+  }
+}
+
+
+// JSX
+<input type="file" accept="image/*" onChange={onFileChange} />
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -551,7 +595,7 @@ export default function EditPostPage() {
               <input
                 type="file"
                 accept="image/*"
-                onChange={handleLogoUpload}
+                onChange={onFileChange}
                 className={`${styles.input} ${styles.narrowInput}`}
                 // required
               />

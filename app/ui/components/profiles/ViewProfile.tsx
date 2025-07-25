@@ -51,6 +51,10 @@ export default function ViewProfile({
       website,
       headline,
       searchingFor,
+      timeCommitment,
+      presence,
+      location,
+      typeOfPerson,
     });
 
     router.push(`/profile/edit?${params.toString()}`);

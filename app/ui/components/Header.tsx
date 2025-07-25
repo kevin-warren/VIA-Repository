@@ -15,11 +15,11 @@ export default async function Header() {
         <div className={styles.titleRow}>
           <Link href="/" className={styles.title}>Project Accelerate</Link>
           <span className={styles.slogan}>
-            Driving solutions for Virginia entrepreneurs
+            Driving Solutions for Virginia Entrepreneurs
           </span>
         </div>
         <p className={styles.description}>
-          Project Accelerate brings together a diverse group of business leaders, industry experts, students, faculty, and advisors all dedicated to supporting Virginia&apos;s growing businesses. The Project Accelerate Repository is a virtual hub where innovators can post specific challenges — from choosing the right CRM system to refining a prototype or business model — and connect with advisors ready to help.
+          Project Accelerate brings together a diverse group of business leaders, industry experts, students, faculty, and advisors all dedicated to supporting Virginia&apos;s growing businesses. The Project Accelerate Repository is a virtual hub where innovators can post specific challenges — from choosing the right CRM system to refining a prototype or business model — and connect with advisors eager to help.
         </p>
       </div>
       {session?.user ? (

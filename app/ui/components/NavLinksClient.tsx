@@ -16,7 +16,7 @@ export default function NavLinksClient({ hasProfile }: NavLinksClientProps) {
     },
     // Conditionally show profile creation link
     !hasProfile && {
-      name: 'Create Profile Post',
+      name: 'Create Advisor Post',
       href: '/profile/insert',
     },
   ].filter(Boolean) as { name: string; href: string }[];

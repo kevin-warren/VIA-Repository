@@ -39,32 +39,55 @@ export default function CreateProfilePage() {
     }));
   };
 
+  // const uploadResume = async (file: File): Promise<string | null> => {
+  //   const formDataCloudinary = new FormData();
+  //   formDataCloudinary.append('file', file);
+  //   formDataCloudinary.append('upload_preset', 'resume_auto_preset'); // replace with your actual preset
+
+  //   try {
+  //     const res = await fetch(
+  //       'https://api.cloudinary.com/v1_1/dcqnwr46v/auto/upload',
+  //       {
+  //         method: 'POST',
+  //         body: formDataCloudinary,
+  //       }
+  //     );
+
+  //     if (!res.ok) {
+  //       const text = await res.text();
+  //       throw new Error(`Upload failed: ${text}`);
+  //     }
+
+  //     const data = await res.json();
+  //     return data.secure_url || null;
+  //   } catch (error) {
+  //     console.error('Resume upload failed:', error);
+  //     return null;
+  //   }
+  // };
+
   const uploadResume = async (file: File): Promise<string | null> => {
-    const formDataCloudinary = new FormData();
-    formDataCloudinary.append('file', file);
-    formDataCloudinary.append('upload_preset', 'resume_auto_preset'); // replace with your actual preset
-
+    const formData = new FormData();
+    formData.append('file', file);
+  
     try {
-      const res = await fetch(
-        'https://api.cloudinary.com/v1_1/dcqnwr46v/auto/upload',
-        {
-          method: 'POST',
-          body: formDataCloudinary,
-        }
-      );
-
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData,
+      });
+  
       if (!res.ok) {
-        const text = await res.text();
-        throw new Error(`Upload failed: ${text}`);
+        throw new Error(await res.text());
       }
-
+  
       const data = await res.json();
-      return data.secure_url || null;
+      return data.url;
     } catch (error) {
       console.error('Resume upload failed:', error);
       return null;
     }
   };
+  
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

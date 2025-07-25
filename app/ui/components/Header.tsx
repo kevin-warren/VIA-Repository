@@ -13,13 +13,13 @@ export default async function Header() {
     <header className={styles.header}>
       <div className={styles.titleWrapper}>
         <div className={styles.titleRow}>
-          <Link href="/" className={styles.title}>Village Advisor Network</Link>
+          <Link href="/" className={styles.title}>Project Accelerate</Link>
           <span className={styles.slogan}>
-            Accelerating solutions for Virginia entrepreneurs
+            Driving solutions for Virginia entrepreneurs
           </span>
         </div>
         <p className={styles.description}>
-          The Village Advisor Network (VAN) is a diverse group of business leaders, industry experts, students, faculty, and advisors committed to supporting Virginia’s growing businesses. The VAN Repository is a virtual space where innovators can post specific challenges — from choosing the right CRM system to refining a prototype or business model — and connect with advisors ready to help.
+          Project Accelerate brings together a diverse group of business leaders, industry experts, students, faculty, and advisors all dedicated to supporting Virginia's growing businesses. The Project Accelerate Repository is a virtual hub where innovators can post specific challenges — from choosing the right CRM system to refining a prototype or business model — and connect with advisors ready to help.
         </p>
       </div>
       {session?.user ? (

@@ -23,6 +23,7 @@ export default async function SideNav() {
         ) : (
           <SignInButton />
         )} */}
+        <a href="https://www.linkedin.com/in/kevin-t-warren" className={styles.madeBy}>Made by: Kevin Warren</a>
       </div>
     </div>
   );

@@ -44,20 +44,23 @@ export default function ApplyPage() {
   };
 
   const uploadResume = async (file: File): Promise<string | null> => {
-    const cloudinaryData = new FormData();
-    cloudinaryData.append('file', file);
-    cloudinaryData.append('upload_preset', 'resume_auto_preset');
-
+    const formData = new FormData();
+    formData.append('file', file);
+  
     try {
-      const res = await fetch('https://api.cloudinary.com/v1_1/dcqnwr46v/raw/upload', {
+      const res = await fetch('/api/upload', {
         method: 'POST',
-        body: cloudinaryData,
+        body: formData,
       });
-
+  
+      if (!res.ok) {
+        throw new Error(await res.text());
+      }
+  
       const data = await res.json();
-      return data.secure_url;
-    } catch (err) {
-      console.error('Upload failed:', err);
+      return data.url;
+    } catch (error) {
+      console.error('Resume upload failed:', error);
       return null;
     }
   };

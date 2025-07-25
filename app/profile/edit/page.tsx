@@ -394,7 +394,7 @@ export default function EditProfilePage() {
           <div className={styles.formRow}>
             <div className={styles.formGroup}>
               <label htmlFor="email" className={styles.label}>
-                Email*
+                Email
               </label>
               <input
                 type="email"
@@ -403,7 +403,7 @@ export default function EditProfilePage() {
                 value={formData.email}
                 onChange={handleChange}
                 className={`${styles.input} ${styles.narrowInput}`}
-                required
+                // required
               />
             </div>
             <div className={styles.formGroup}>
@@ -466,7 +466,7 @@ export default function EditProfilePage() {
           <div className={styles.formRow}>
             <div className={styles.formGroup}>
               <label htmlFor="presence" className={styles.label}>
-                Work Type
+                Preferred Work Type
               </label>
               <select
                 id="presence"

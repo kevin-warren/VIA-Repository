@@ -293,26 +293,37 @@ export default function Tabs({ posts, profiles }: TabProps) {
                 )}
               </div>
 
-              <hr />
+              
 
               {/* Bio Section */}
               {selectedProfile.bio && (
                 <>
+                  <hr />
                   <h3>About</h3>
                   <p>{selectedProfile.bio}</p>
-                  <hr />
+                  
                 </>
               )}
 
+              
+
               {/* Contact Section */}
-              <h3>Contact</h3>
+              
               <div className={styles.profileContact}>
-                {selectedProfile.email && (
+              {(selectedProfile.email || selectedProfile.phone || selectedProfile.linkedin || selectedProfile.website) && (
+                  <>
+                  <hr />
+                  <h3>Contact</h3>
+                  </>
+                  )}
+
+                  {selectedProfile.email && (
                   <p>
                     <strong>Email:</strong>{' '}
                     <a href={`mailto:${selectedProfile.email}`}>{selectedProfile.email}</a>
                   </p>
                 )}
+
                 {selectedProfile.phone && (
                   <p>
                     <strong>Phone:</strong>{' '}

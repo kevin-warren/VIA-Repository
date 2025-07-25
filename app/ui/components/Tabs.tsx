@@ -110,6 +110,7 @@ export default function Tabs({ posts, profiles }: TabProps) {
                   </strong>
                 </p>
 
+                {selectedPost.category && <p><strong>Industry Type:</strong> {selectedPost.category}</p>}
 
                 {selectedPost.pay && <p><strong>Compensation:</strong> {selectedPost.pay}</p>}
                 {/* {selectedPost.startDate && <p><strong>Start Date:</strong> {selectedPost.startDate}</p>}
@@ -255,6 +256,7 @@ export default function Tabs({ posts, profiles }: TabProps) {
                   {selectedProfile.date && (
                     <span className={styles.jobDate}>Posted on: {selectedProfile.date}</span>
                   )}
+                  
                 </p>
               )}
 

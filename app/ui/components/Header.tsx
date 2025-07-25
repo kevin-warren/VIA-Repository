@@ -13,7 +13,7 @@ export default async function Header() {
     <header className={styles.header}>
       <div className={styles.titleWrapper}>
         <div className={styles.titleRow}>
-          <Link href="/" className={styles.title}>The Village Advisor Network</Link>
+          <Link href="/" className={styles.title}>Village Advisor Network</Link>
           <span className={styles.slogan}>
             Accelerating solutions for Virginia entrepreneurs
           </span>

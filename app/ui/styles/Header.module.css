@@ -25,7 +25,7 @@
   justify-content: space-between;
   align-items: flex-start;
 
-  padding: 0.75rem 1rem; /* tighter top/bottom padding */
+  padding: 0.25rem 1rem 0rem 1rem; /* tighter top/bottom padding */
   border-bottom: 1px solid #ddd;
 }
 
@@ -57,13 +57,13 @@
   font-style: italic;
   color: white;
   opacity: 0;
-  animation: fadeIn 1s ease-out 1.3s forwards; /* delay matches title animation */
+  animation: slideInLeftFade 1s ease-out 1.3s forwards; /* delay matches title animation */
   white-space: nowrap;
 }
 
 .description {
   font-size: 0.9rem;
-  font-style: italic;
+  /* font-style: italic; */
   color: white;
   margin-top: 0.5rem;
   padding-left: 1rem;

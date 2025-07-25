@@ -37,7 +37,8 @@
 .postList {
   width: 50%;
   overflow-y: auto;
-  height: calc(100vh - 140px - 15px);
+  height: calc(100vh - 200px);
+  will-change: transform, scroll-position;
 }
 
 .postDetail {
@@ -49,7 +50,7 @@
   overflow-y: auto;
   margin-left: 1rem;
   margin-top: -3rem;
-  height: calc(100vh - 180px);
+  height: calc(100vh - 220px);
 }
 
 .postDetail h1 {

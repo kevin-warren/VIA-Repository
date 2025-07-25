@@ -73,7 +73,7 @@
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
-  height: calc(100vh - 110px);              /* take full viewport height */
+  height: calc(100vh - 150px);              /* take full viewport height */
   display: flex;
   flex-direction: column;
   overflow: hidden;           /* prevent outer scroll */

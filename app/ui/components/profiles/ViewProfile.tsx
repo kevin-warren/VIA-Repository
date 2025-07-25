@@ -15,6 +15,10 @@ export default function ViewProfile({
   website,
   headline,
   searchingFor,
+  timeCommitment,
+  presence,
+  location,
+  typeOfPerson,
 }: {
   name: string;
   bio: string | null;
@@ -26,6 +30,10 @@ export default function ViewProfile({
   website: string;
   headline: string;
   searchingFor: string;
+  timeCommitment: string;
+  presence: string;
+  location: string;
+  typeOfPerson: string;
 }) {
   const { data: session } = useSession();
   const router = useRouter();

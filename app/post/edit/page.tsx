@@ -575,7 +575,7 @@ export default function EditPostPage() {
 
           <div className={styles.formRow}>
           <div className={styles.formGroup}>
-            <label className={styles.label}>Project Category*</label>
+            <label className={styles.label}>Industry Type*</label>
             <select
               name="category"
               value={formData.category}
@@ -584,20 +584,24 @@ export default function EditPostPage() {
               required
             >
               <option value="">Select</option>
-              <option>Technology</option>
-              <option>Healthcare</option>
-              <option>Finance</option>
-              <option>Education</option>
-              <option>Marketing</option>
-              <option>Retail</option>
-              <option>Engineering</option>
-              <option>Legal</option>
+              <option>Agriculture</option>
+              <option>Food/Beverage</option>
+              <option>Life Science and Health</option>
+              <option>Manufacturing</option>
+              <option>Information Technology</option>
+              <option>Autonomous Systems</option>
+              <option>Unmanned Systems</option>
+              <option>Energy</option>
+              <option>Environmental Technology</option>
+              <option>Outdoor Recreation/Tourism</option>
+              <option>Main Street</option>
+              <option>Service Industry</option>
               <option>Other</option>
             </select>
           </div>
 
           <div className={styles.formGroup}>
-            <label className={styles.label}>Project Type*</label>
+            <label className={styles.label}>Work Type*</label>
             <select
               name="jobType"
               value={formData.jobType}

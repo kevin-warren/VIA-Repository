@@ -233,6 +233,10 @@ export default function EditProfilePage() {
     headline: '',
     resume: '',
     searchingFor: '',
+    timeCommitment: '',
+    presence: '',
+    location: '',
+    typeOfPerson: '',
   });
 
   const [resumeFile, setResumeFile] = useState<File | null>(null);
@@ -259,6 +263,10 @@ export default function EditProfilePage() {
           website: profile.website || '',
           headline: profile.headline || '',
           searchingFor: profile.searchingFor || '',
+          timeCommitment: profile.timeCommitment || '',
+          presence: profile.presence || '',
+          location: profile.location || '',
+          typeOfPerson: profile.typeOfPerson || '',
         });
         setLoading(false);
       } catch (err) {
@@ -270,7 +278,7 @@ export default function EditProfilePage() {
   }, [session]);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -438,6 +446,78 @@ export default function EditProfilePage() {
               className={styles.input}
               placeholder="e.g. Full-time Marketing jobs starting in Spring 2026"
             />
+          </div>
+
+          <div className={styles.formGroup}>
+            <label htmlFor="timeCommitment" className={styles.label}>
+              Time Commitment
+            </label>
+            <input
+              type="text"
+              id="timeCommitment"
+              name="timeCommitment"
+              value={formData.timeCommitment}
+              onChange={handleChange}
+              className={styles.input}
+              placeholder="e.g. 10 Hours/Week in the Fall"
+            />
+          </div>
+
+          <div className={styles.formRow}>
+            <div className={styles.formGroup}>
+              <label htmlFor="presence" className={styles.label}>
+                Work Type
+              </label>
+              <select
+                id="presence"
+                name="presence"
+                value={formData.presence}
+                onChange={handleChange}
+                className={styles.input}
+              >
+                <option value="">Select presence</option>
+                <option value="In-Person">In-Person</option>
+                <option value="Hybrid">Hybrid</option>
+                <option value="Remote">Remote</option>
+              </select>
+            </div>
+          
+
+
+            <div className={styles.formGroup}>
+              <label htmlFor="location" className={styles.label}>
+                Available Work Location(s)
+              </label>
+              <input
+                type="text"
+                id="location"
+                name="location"
+                value={formData.location}
+                onChange={handleChange}
+                className={styles.input}
+              />
+            </div>
+
+            <div className={styles.formGroup}>
+              <label htmlFor="typeOfPerson" className={styles.label}>
+                Type of Person
+              </label>
+              <select
+                id="typeOfPerson"
+                name="typeOfPerson"
+                value={formData.typeOfPerson}
+                onChange={handleChange}
+                className={styles.input}
+              >
+                <option value="">Select type</option>
+                <option value="High School Student">High School Student</option>
+                <option value="College Student">College Student</option>
+                <option value="Business Leader">Business Leader</option>
+                <option value="Industry Expert">Industry Expert</option>
+                <option value="University Faculty">University Faculty</option>
+                <option value="Business Advisor">Business Advisor</option>
+              </select>
+            </div>
           </div>
 
           <div className={styles.formGroup}>

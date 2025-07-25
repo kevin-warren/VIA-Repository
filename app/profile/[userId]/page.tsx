@@ -5,7 +5,7 @@ export const dynamic = 'force-dynamic';
 
 export default async function ProfilePage({ params }: { params: { userId: string } }) {
   const result = await sql`
-    SELECT name, bio, date, resume, email, phone, linkedin, website, headline, "searchingFor" FROM "Profile"
+    SELECT name, bio, date, resume, email, phone, linkedin, website, headline, "searchingFor", "timeCommitment", presence, location, "typeOfPerson" FROM "Profile"
     WHERE "userId" = ${params.userId}
     LIMIT 1;
   `;
@@ -28,6 +28,10 @@ export default async function ProfilePage({ params }: { params: { userId: string
         website={profile.website}
         headline={profile.headline}
         searchingFor={profile.searchingFor}
+        timeCommitment={profile.timeCommitment}
+        presence={profile.presence}
+        location={profile.location}
+        typeOfPerson={profile.typeOfPerson}
       />
     </main>
     </>

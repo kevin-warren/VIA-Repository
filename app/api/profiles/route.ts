@@ -13,10 +13,10 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { id, name, bio, date, author, userId, resume, email, phone, linkedin, website, headline } = body;
+    const { id, name, bio, date, author, userId, resume, email, phone, linkedin, website, headline, searchingFor, timeCommitment, presence, location, typeOfPerson } = body;
 
-    await sql`INSERT INTO "Profile" (id, name, bio, date, author, "userId", resume, email, phone, linkedin, website, headline)
-      VALUES (${id}, ${name}, ${bio}, ${date}, ${author}, ${userId}, ${resume}, ${email}, ${phone}, ${linkedin}, ${website}, ${headline});`;
+    await sql`INSERT INTO "Profile" (id, name, bio, date, author, "userId", resume, email, phone, linkedin, website, headline, "searchingFor", "timeCommitment", presence, location, "typeOfPerson")
+      VALUES (${id}, ${name}, ${bio}, ${date}, ${author}, ${userId}, ${resume}, ${email}, ${phone}, ${linkedin}, ${website}, ${headline}, ${searchingFor}, ${timeCommitment}, ${presence}, ${location}, ${typeOfPerson});`;
 
     return NextResponse.json({ message: 'Profile successfully inserted' }, { status: 200 });
   } catch (error) {
@@ -28,11 +28,11 @@ export async function POST(request: Request) {
 export async function PUT(request: Request) {
   try {
     const body = await request.json();
-    const { name, bio, date, author, userId, resume, email, phone, linkedin, website, headline, searchingFor } = body;
+    const { name, bio, date, author, userId, resume, email, phone, linkedin, website, headline, searchingFor, timeCommitment, presence, location, typeOfPerson } = body;
 
     await sql`
       UPDATE "Profile"
-      SET name = ${name}, bio = ${bio}, date = ${date}, author = ${author}, resume = ${resume}, email = ${email}, phone = ${phone}, linkedin = ${linkedin}, website = ${website}, headline = ${headline}, "searchingFor" = ${searchingFor}
+      SET name = ${name}, bio = ${bio}, date = ${date}, author = ${author}, resume = ${resume}, email = ${email}, phone = ${phone}, linkedin = ${linkedin}, website = ${website}, headline = ${headline}, "searchingFor" = ${searchingFor}, "timeCommitment" = ${timeCommitment}, presence = ${presence}, location = ${location}, "typeOfPerson" = ${typeOfPerson}
       WHERE "userId" = ${userId};
     `;
 

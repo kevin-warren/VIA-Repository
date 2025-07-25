@@ -61,6 +61,10 @@ export async function PATCH(
       resume,
       author,
       searchingFor,
+      timeCommitment,
+      presence,
+      location,
+      typeOfPerson
     } = data;
 
     /*const result =*/ await sql`
@@ -76,7 +80,11 @@ export async function PATCH(
         headline = ${headline},
         resume = ${resume},
         author = ${author},
-        "searchingFor" = ${searchingFor}
+        "searchingFor" = ${searchingFor},
+        "timeCommitment" = ${timeCommitment},
+        presence = ${presence},
+        location = ${location},
+        "typeOfPerson" = ${typeOfPerson}
       WHERE id = ${params.userId}
     `;
 

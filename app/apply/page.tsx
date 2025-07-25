@@ -25,6 +25,7 @@ export default function ApplyPage() {
     resume: '',
     bio: '',
     date: new Date().toISOString().slice(0, 10),
+    message: '',
   });
 
   useEffect(() => {
@@ -110,7 +111,7 @@ export default function ApplyPage() {
     return (
       <main className={styles.pageWrapper}>
         <div className={styles.container}>
-          <h2 className={styles.heading}>Job Application</h2>
+          <h2 className={styles.heading}>Project Application</h2>
           <p>You must be signed in to apply.</p>
         </div>
       </main>
@@ -120,7 +121,7 @@ export default function ApplyPage() {
   return (
     <main className={styles.pageWrapper}>
       <div className={styles.container}>
-        <h2 className={styles.heading}>Job Application</h2>
+        <h2 className={styles.heading}>Project Application</h2>
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.formGroup}>
             <label className={styles.label}>Full Name*</label>
@@ -189,16 +190,16 @@ export default function ApplyPage() {
             />
           </div>
 
-          {/* <div className={styles.formGroup}>
-            <label className={styles.label}>Bio</label>
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Leave a Message</label>
             <textarea
-              name="bio"
-              value={formData.bio}
+              name="message"
+              value={formData.message}
               onChange={handleChange}
               rows={4}
               className={styles.input}
             />
-          </div> */}
+          </div>
 
           <div className={styles.formGroup}>
             <label className={styles.label}>Date</label>

@@ -1,31 +1,72 @@
-/* app/ui/styles/Header.module.css */
+@keyframes slideInLeftFade {
+  from {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
 
 .header {
-    height: auto; /* Adjust as needed */
-    background-image: url('/images/logo-3.jpg');
-    background-size: cover;
-    background-position: 0% 40%;
-    background-repeat: no-repeat;
+  background-image: url('/images/logo-3.jpg');
+  background-size: cover;
+  background-position: 0% 40%;
+  background-repeat: no-repeat;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: top;
-    padding: 1rem;
-    /* background-color: #f9fafb; */
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .title {
-    font-size: 2rem;               /* Bigger size */
-    font-weight: 900;              /* Extra bold */
-    color: white;                  /* Strong contrast */
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6); /* Makes text stand out */
-    padding-left: 1rem;
-  }
-  
-  
-  .authControls {
-    /* display: flex; */
-    /* align-items: center; */
-    gap: 1rem;
-  }
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  padding: 0.75rem 1rem; /* tighter top/bottom padding */
+  border-bottom: 1px solid #ddd;
+}
+
+
+.titleWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 60%;
+  animation: slideInLeftFade 1.2s ease-out forwards;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 900;
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+  padding-left: 1rem;
+}
+
+.slogan {
+  font-size: 1rem;
+  font-style: italic;
+  color: white;
+  opacity: 0;
+  animation: fadeIn 1s ease-out 1.3s forwards; /* delay matches title animation */
+  white-space: nowrap;
+}
+
+.description {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: white;
+  margin-top: 0.5rem;
+  padding-left: 1rem;
+  opacity: 0;
+  animation: fadeIn 1s ease-out 2.2s forwards;
+}

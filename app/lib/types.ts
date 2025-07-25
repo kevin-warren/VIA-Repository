@@ -32,6 +32,10 @@ export type Post = {
     website?: string | null;
     headline: string;
     searchingFor?: string | null;
+    timeCommitment?: string | null;
+    presence?: string | null;
+    location?: string | null;
+    typeOfPerson?: string | null;
   };
 
 export type Application = {

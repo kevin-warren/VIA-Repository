@@ -77,6 +77,7 @@ interface Application {
   resume?: string;
   bio?: string;
   date: string;
+  message?: string;
 }
 
 export default function ViewApplicationPage({
@@ -137,6 +138,14 @@ export default function ViewApplicationPage({
         <>
           <h3>About</h3>
           <p>{application.bio}</p>
+          <hr />
+        </>
+      )}
+
+      {application.message && (
+        <>
+          <h3>Message</h3>
+          <p>{application.message}</p>
           <hr />
         </>
       )}

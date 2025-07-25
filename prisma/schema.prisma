@@ -103,20 +103,24 @@ model Post {
 }
 
 model Profile {
-  id           String   @id @default(cuid())
-  userId       String   @unique
-  name         String
-  bio          String
-  date         DateTime @default(now())
-  author       String
-  resume       String?
-  headline     String
-  email        String
-  phone        String?
-  linkedin     String?
-  website      String?
-  searchingFor String?
-  user         User     @relation(fields: [userId], references: [id])
+  id             String   @id @default(cuid())
+  userId         String   @unique
+  name           String
+  bio            String
+  date           DateTime @default(now())
+  author         String
+  resume         String?
+  headline       String
+  email          String
+  phone          String?
+  linkedin       String?
+  website        String?
+  searchingFor   String?
+  timeCommitment String?
+  presence       String?
+  location       String?
+  typeOfPerson   String?
+  user           User     @relation(fields: [userId], references: [id])
 }
 
 model Application {
@@ -131,6 +135,7 @@ model Application {
   resume   String? // optional
   bio      String? // optional
   date     DateTime
+  message  String? // optional
 
   // Relations (optional, depending on your schema)
   post Post @relation(fields: [postId], references: [id])

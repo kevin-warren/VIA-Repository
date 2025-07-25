@@ -91,6 +91,7 @@ interface Application {
   resume?: string;
   bio?: string;
   date: string;
+  message?: string;
 }
 
 export default function MyApplicationsPage() {

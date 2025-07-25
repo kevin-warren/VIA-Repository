@@ -8,6 +8,8 @@ import styles from '../styles/Tabs.module.css';
 import type { Post as PostType, Profile as ProfileType } from '../../lib/types';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation'; 
+import { useSession } from 'next-auth/react';
+
 
 interface TabProps {
   posts: PostType[];
@@ -17,6 +19,8 @@ interface TabProps {
 export default function Tabs({ posts, profiles }: TabProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const { data: session } = useSession();
+
   const initialTab = searchParams.get('tab') === 'profiles' ? 'profiles' : 'jobs';
   const [activeTab, setActiveTab] = useState<'jobs' | 'profiles'>(initialTab);
 
@@ -64,12 +68,19 @@ export default function Tabs({ posts, profiles }: TabProps) {
             {selectedPost ? (
               <div className={styles.jobPosting}>
                 <div className={styles.applyButtonWrapper}>
-                  <button
-                    className={styles.tab}
-                    onClick={() => router.push(`/apply?postId=${selectedPost.id}`)}
-                  >
-                    Apply
-                  </button>                
+                <button
+                  className={styles.tab}
+                  onClick={() => {
+                    if (!session) {
+                      router.push(`/api/auth/signin?callbackUrl=/apply?postId=${selectedPost.id}`);
+                    } else {
+                      router.push(`/apply?postId=${selectedPost.id}`);
+                    }
+                  }}
+                >
+                  Apply
+                </button>
+               
                 </div>
 
                 <div className={styles.logoContainer}>
@@ -100,7 +111,7 @@ export default function Tabs({ posts, profiles }: TabProps) {
                 </p>
 
 
-                {selectedPost.pay && <p><strong>Pay Rate:</strong> {selectedPost.pay}</p>}
+                {selectedPost.pay && <p><strong>Compensation:</strong> {selectedPost.pay}</p>}
                 {/* {selectedPost.startDate && <p><strong>Start Date:</strong> {selectedPost.startDate}</p>}
                 {selectedPost.endDate && <p><strong>End Date:</strong> {selectedPost.endDate}</p>} */}
 
@@ -164,7 +175,7 @@ export default function Tabs({ posts, profiles }: TabProps) {
             ))}
           </div>
 
-          <div className={styles.postDetail}>
+          {/* <div className={styles.postDetail}>
             {selectedProfile ? (
               <>
                 <h1>{selectedProfile.name}</h1>
@@ -186,6 +197,19 @@ export default function Tabs({ posts, profiles }: TabProps) {
 
                 <hr />
 
+                {selectedProfile.timeCommitment && (
+                  <p><strong>Time Commitment:</strong> {selectedProfile.timeCommitment}</p>
+                )}
+                {selectedProfile.presence && (
+                  <p><strong>Presence:</strong> {selectedProfile.presence}</p>
+                )}
+                {selectedProfile.location && (
+                  <p><strong>Location:</strong> {selectedProfile.location}</p>
+                )}
+                {selectedProfile.typeOfPerson && (
+                  <p><strong>Type of Person:</strong> {selectedProfile.typeOfPerson}</p>
+                )}
+
                 {selectedProfile.bio && (
                   <>
                     <h3>About</h3>
@@ -206,7 +230,118 @@ export default function Tabs({ posts, profiles }: TabProps) {
             ) : (
               <p className={styles.postDetailText}>Select a profile to view details</p>
             )}
-          </div>
+          </div> */}
+
+        <div className={styles.postDetail}>
+          {selectedProfile ? (
+            <>
+              {/* Name and Headline */}
+              <div className={styles.profileHeader}>
+                <h1>{selectedProfile.name}</h1>
+                <h3 className={styles.profileHeadline}>{selectedProfile.headline}</h3>
+              </div>
+
+              {/* Resume and Date */}
+              {(selectedProfile.resume || selectedProfile.date) && (
+                <p className={styles.resumeAndDate}>
+                  {selectedProfile.resume && (
+                    <a href={selectedProfile.resume} target="_blank" rel="noopener noreferrer">
+                      <strong>View Resume</strong>
+                    </a>
+                  )}
+                  {selectedProfile.resume && selectedProfile.date && (
+                    <span className={styles.dot}> • </span>
+                  )}
+                  {selectedProfile.date && (
+                    <span className={styles.jobDate}>Posted on: {selectedProfile.date}</span>
+                  )}
+                </p>
+              )}
+
+              
+
+              <hr />
+
+              {/* Quick Details */}
+
+              {/* Searching For */}
+              {selectedProfile.searchingFor && (
+                <p>
+                  <strong>Searching for:</strong> {selectedProfile.searchingFor}
+                </p>
+              )}
+              <div className={styles.profileDetailsGrid}>
+                {selectedProfile.timeCommitment && (
+                  <p>
+                    <strong>Time Commitment:</strong> {selectedProfile.timeCommitment}
+                  </p>
+                )}
+                {selectedProfile.presence && (
+                  <p>
+                    <strong>Preferred Work Style:</strong> {selectedProfile.presence}
+                  </p>
+                )}
+                {selectedProfile.location && (
+                  <p>
+                    <strong>Available Work Location(s):</strong> {selectedProfile.location}
+                  </p>
+                )}
+                {selectedProfile.typeOfPerson && (
+                  <p>
+                    <strong>Type of Person:</strong> {selectedProfile.typeOfPerson}
+                  </p>
+                )}
+              </div>
+
+              <hr />
+
+              {/* Bio Section */}
+              {selectedProfile.bio && (
+                <>
+                  <h3>About</h3>
+                  <p>{selectedProfile.bio}</p>
+                  <hr />
+                </>
+              )}
+
+              {/* Contact Section */}
+              <h3>Contact</h3>
+              <div className={styles.profileContact}>
+                {selectedProfile.email && (
+                  <p>
+                    <strong>Email:</strong>{' '}
+                    <a href={`mailto:${selectedProfile.email}`}>{selectedProfile.email}</a>
+                  </p>
+                )}
+                {selectedProfile.phone && (
+                  <p>
+                    <strong>Phone:</strong>{' '}
+                    <a href={`tel:${selectedProfile.phone}`}>{selectedProfile.phone}</a>
+                  </p>
+                )}
+                {selectedProfile.linkedin && (
+                  <p>
+                    <strong>LinkedIn:</strong>{' '}
+                    <a href={selectedProfile.linkedin} target="_blank" rel="noopener noreferrer">
+                      {selectedProfile.linkedin}
+                    </a>
+                  </p>
+                )}
+                {selectedProfile.website && (
+                  <p>
+                    <strong>Website:</strong>{' '}
+                    <a href={selectedProfile.website} target="_blank" rel="noopener noreferrer">
+                      {selectedProfile.website}
+                    </a>
+                  </p>
+                )}
+              </div>
+            </>
+          ) : (
+            <p className={styles.postDetailText}>Select a profile to view details</p>
+          )}
+        </div>
+
 
         </div>
       )}

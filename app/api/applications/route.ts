@@ -79,17 +79,18 @@ export async function POST(request: Request) {
       date,
       postId,
       userId,
+      message,
     } = await request.json();
 
     const id = uuidv4();
 
     await sql`
       INSERT INTO "Application" (
-        id, name, email, phone, linkedin, website, resume, bio, date, "postId", "userId"
+        id, name, email, phone, linkedin, website, resume, bio, date, "postId", "userId", message
       )
       VALUES (
         ${id}, ${name}, ${email}, ${phone}, ${linkedin}, ${website},
-        ${resume}, ${bio}, ${date}, ${postId}, ${userId}
+        ${resume}, ${bio}, ${date}, ${postId}, ${userId}, ${message}
       )
     `;
 
@@ -125,7 +126,7 @@ export async function POST(request: Request) {
           ${resume ? `<li><strong>Resume:</strong> <a href="${resume}">View Resume</a></li>` : ''}
         </ul>
         <p><a href="${baseUrl}/application/${id}">View full application</a></p>
-
+        <p>${message}</p>
       `,
     });
 

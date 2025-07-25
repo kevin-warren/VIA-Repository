@@ -242,6 +242,15 @@ async function onFileChange(event: React.ChangeEvent<HTMLInputElement>) {
               <option>Outdoor Recreation/Tourism</option>
               <option>Main Street</option>
               <option>Service Industry</option>
+              <option>Financial Services</option>
+              <option>Legal Services</option>
+              <option>Healthcare</option>
+              <option>Education</option>
+              <option>Marketing</option>
+              <option>Retail</option>
+              <option>Engineering</option>
+              <option>Legal</option>
+              <option>Real Estate</option>
               <option>Other</option>
             </select>
           </div>
